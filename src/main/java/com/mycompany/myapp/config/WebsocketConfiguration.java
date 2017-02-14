@@ -52,6 +52,7 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
                     return principal;
                 }
             })
+            .setAllowedOrigins("http://localhost:9000")
             .withSockJS()
             .setInterceptors(httpSessionHandshakeInterceptor());
     }
