@@ -90,6 +90,5 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
           clientsClaim: true,
           skipWaiting: true,
         })
-    ],
-    mode: 'production'
+    ]
 });
