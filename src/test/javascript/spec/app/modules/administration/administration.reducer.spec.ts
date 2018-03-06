@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { REQUEST, FAILURE, SUCCESS } from 'app/shared/reducers/action-type.util';
 
-import administration, {ACTION_TYPES, gatewayRoutes} from 'app/modules/administration/administration.reducer';
+import administration, { ACTION_TYPES } from 'app/modules/administration/administration.reducer';
 
 describe('User managment reducer tests', () => {
   function isEmpty(element): boolean {
@@ -38,26 +38,27 @@ describe('User managment reducer tests', () => {
   });
 
   describe('Requests', () => {
-      it('should set state to loading', () => {
-        testMultipleTypes(
-          [
-            REQUEST(ACTION_TYPES.FETCH_GATEWAY_ROUTE),
-            REQUEST(ACTION_TYPES.FETCH_LOGS),
-            REQUEST(ACTION_TYPES.FETCH_HEALTH),
-            REQUEST(ACTION_TYPES.FETCH_METRICS),
-            REQUEST(ACTION_TYPES.FETCH_THREAD_DUMP),
-            REQUEST(ACTION_TYPES.FETCH_CONFIGURATIONS),
-            REQUEST(ACTION_TYPES.FETCH_ENV),
-            REQUEST(ACTION_TYPES.FETCH_AUDITS)
-          ],
-          {},
-          state => {
-            expect(state).to.contain({
-              errorMessage: null,
-              loading: true
-            });
+    it('should set state to loading', () => {
+      testMultipleTypes(
+        [
+          REQUEST(ACTION_TYPES.FETCH_GATEWAY_ROUTE),
+          REQUEST(ACTION_TYPES.FETCH_LOGS),
+          REQUEST(ACTION_TYPES.FETCH_HEALTH),
+          REQUEST(ACTION_TYPES.FETCH_METRICS),
+          REQUEST(ACTION_TYPES.FETCH_THREAD_DUMP),
+          REQUEST(ACTION_TYPES.FETCH_CONFIGURATIONS),
+          REQUEST(ACTION_TYPES.FETCH_ENV),
+          REQUEST(ACTION_TYPES.FETCH_AUDITS)
+        ],
+        {},
+        state => {
+          expect(state).to.contain({
+            errorMessage: null,
+            loading: true
           });
-      });
+        }
+      );
+    });
   });
 
   describe('Failures', () => {
@@ -96,7 +97,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch logs request', () => {
-      const payload = { data: [{ 'name' : 'ROOT', 'level' : 'DEBUG' }] };
+      const payload = { data: [{ name: 'ROOT', level: 'DEBUG' }] };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_LOGS), payload });
 
       expect(toTest).to.deep.include({
@@ -106,7 +107,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch health request', () => {
-      const payload = { data: { 'status' : 'UP' } };
+      const payload = { data: { status: 'UP' } };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_HEALTH), payload });
 
       expect(toTest).to.deep.include({
@@ -116,7 +117,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch metrics request', () => {
-      const payload = { data: { 'version': '3.1.3', 'gauges': {} } };
+      const payload = { data: { version: '3.1.3', gauges: {} } };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_METRICS), payload });
 
       expect(toTest).to.deep.include({
@@ -126,7 +127,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch thread dump request', () => {
-      const payload = { data: [{ 'threadName': 'hz.gateway.cached.thread-6', 'threadId': 9266 }] };
+      const payload = { data: [{ threadName: 'hz.gateway.cached.thread-6', threadId: 9266 }] };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_THREAD_DUMP), payload });
 
       expect(toTest).to.deep.include({
@@ -136,7 +137,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch configurations request', () => {
-      const payload = { data: { 'contexts' : { 'jhipster' : { 'beans' : {} } } } };
+      const payload = { data: { contexts: { jhipster: { beans: {} } } } };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_CONFIGURATIONS), payload });
 
       expect(toTest).to.deep.include({
@@ -149,7 +150,7 @@ describe('User managment reducer tests', () => {
     });
 
     it('should update state according to a successful fetch env request', () => {
-      const payload = { data: { activeProfiles : [ 'swagger', 'dev' ] } };
+      const payload = { data: { activeProfiles: ['swagger', 'dev'] } };
       const toTest = administration(undefined, { type: SUCCESS(ACTION_TYPES.FETCH_ENV), payload });
 
       expect(toTest).to.deep.include({
@@ -173,14 +174,13 @@ describe('User managment reducer tests', () => {
       });
     });
   });
-
   describe('Websocket Message Handling', () => {
     it('should update state according to a successful websocket message receipt', () => {
       const payload = { id: 1, userLogin: 'admin', page: 'home', sessionId: 'abc123' };
       const toTest = administration(undefined, { type: ACTION_TYPES.WEBSOCKET_MESSAGE, payload });
 
       expect(toTest).to.deep.include({
-        tracker: { activities: [ payload ] }
+        tracker: { activities: [payload] }
       });
     });
 
@@ -191,7 +191,7 @@ describe('User managment reducer tests', () => {
       const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_MESSAGE, payload: secondPayload });
 
       expect(secondState).to.deep.include({
-        tracker: { activities: [ secondPayload ] }
+        tracker: { activities: [secondPayload] }
       });
     });
 
@@ -202,7 +202,7 @@ describe('User managment reducer tests', () => {
       const secondState = administration(firstState, { type: ACTION_TYPES.WEBSOCKET_MESSAGE, payload: secondPayload });
 
       expect(secondState).to.deep.include({
-        tracker: { activities: [ ] }
+        tracker: { activities: [] }
       });
     });
   });

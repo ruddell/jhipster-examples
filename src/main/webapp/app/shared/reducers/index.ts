@@ -13,6 +13,7 @@ import password from 'app/modules/account/password/password.reducer';
 import settings from 'app/modules/account/settings/settings.reducer';
 import passwordReset from 'app/modules/account/password-reset/password-reset.reducer';
 
+import foo from 'app/entities/foo/foo.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export default combineReducers({
@@ -26,6 +27,7 @@ export default combineReducers({
   passwordReset,
   password,
   settings,
+  foo,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });
