@@ -7,6 +7,7 @@ import errorMiddleware from './error-middleware';
 import notificationMiddleware from './notification-middleware';
 import loggerMiddleware from './logger-middleware';
 import websocketMiddleware from './websocket-middleware';
+import Reactotron from 'reactotron-react-js';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 import { routerMiddleware } from 'react-router-redux';
 
@@ -27,6 +28,9 @@ const composedMiddlewares = middlewares =>
     ? compose(applyMiddleware(...defaultMiddlewares, ...middlewares), DevTools.instrument())
     : compose(applyMiddleware(...defaultMiddlewares, ...middlewares));
 
-const initialize = (initialState = {}, middlewares = []) => createStore(reducer, initialState, composedMiddlewares(middlewares));
+const initialize = (initialState = {}, middlewares = []) =>
+  process.env.NODE_ENV === 'development'
+    ? Reactotron.createStore(reducer, initialState, composedMiddlewares(middlewares))
+    : createStore(reducer, initialState, composedMiddlewares(middlewares));
 
 export default initialize;
