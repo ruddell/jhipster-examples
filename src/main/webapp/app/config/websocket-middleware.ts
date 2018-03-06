@@ -13,6 +13,31 @@ let listener: Observable<any>;
 let listenerObserver: Observer<any>;
 let alreadyConnectedOnce = false;
 
+const createConnection = (): Promise<any> => new Promise((resolve, reject) => (connectedPromise = resolve));
+
+const createListener = (): Observable<any> =>
+  new Observable(observer => {
+    listenerObserver = observer;
+  });
+
+const sendActivity = () => {
+  connection.then(() => {
+    stompClient.send(
+      '/topic/activity', // destination
+      JSON.stringify({ page: window.location.hash }), // body
+      {} // header
+    );
+  });
+};
+
+const subscribe = () => {
+  connection.then(() => {
+    subscriber = stompClient.subscribe('/topic/tracker', data => {
+      listenerObserver.next(JSON.parse(data.body));
+    });
+  });
+};
+
 const connect = () => {
   if (connectedPromise !== null || alreadyConnectedOnce) {
     // the connection is already being established
@@ -56,37 +81,12 @@ const disconnect = () => {
 
 const receive = () => listener;
 
-const sendActivity = () => {
-  connection.then(() => {
-    stompClient.send(
-      '/topic/activity', // destination
-      JSON.stringify({ page: window.location.hash }), // body
-      {} // header
-    );
-  });
-};
-
-const subscribe = () => {
-  connection.then(() => {
-    subscriber = stompClient.subscribe('/topic/tracker', data => {
-      listenerObserver.next(JSON.parse(data.body));
-    });
-  });
-};
-
 const unsubscribe = () => {
   if (subscriber !== null) {
     subscriber.unsubscribe();
   }
   listener = createListener();
 };
-
-const createListener = (): Observable<any> =>
-  new Observable(observer => {
-    listenerObserver = observer;
-  });
-
-const createConnection = (): Promise<any> => new Promise((resolve, reject) => (connectedPromise = resolve));
 
 export default store => next => action => {
   if (action.type === 'authentication/GET_SESSION_FULFILLED') {
@@ -100,6 +100,7 @@ export default store => next => action => {
       });
     }
   } else if (action.type === 'authentication/GET_SESSION_REJECTED') {
+    unsubscribe();
     disconnect();
   }
   return next(action);
