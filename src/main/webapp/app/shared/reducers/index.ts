@@ -12,6 +12,7 @@ import activate from 'app/modules/account/activate/activate.reducer';
 import password from 'app/modules/account/password/password.reducer';
 import settings from 'app/modules/account/settings/settings.reducer';
 import passwordReset from 'app/modules/account/password-reset/password-reset.reducer';
+import { routerReducer } from 'react-router-redux';
 
 import foo from 'app/entities/foo/foo.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
@@ -22,6 +23,7 @@ export default combineReducers({
   layout,
   administration,
   userManagement,
+  router: routerReducer,
   register,
   activate,
   passwordReset,

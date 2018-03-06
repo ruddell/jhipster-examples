@@ -11,6 +11,10 @@ import { setLocale } from './shared/reducers/locale';
 import Header from './shared/layout/header/header';
 import Footer from './shared/layout/footer/footer';
 import AppRoutes from './routes';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+
+export const history = createHistory();
 
 export interface IAppProps {
   location: any;
@@ -35,22 +39,24 @@ export class App extends React.Component<IAppProps> {
   render() {
     const paddingTop = '60px';
     return (
-      <Router>
-        <div className="app-container" style={{ paddingTop }}>
-          <Header
-            isAuthenticated={this.props.isAuthenticated}
-            currentLocale={this.props.currentLocale}
-            onLocaleChange={this.props.setLocale}
-          />
-          <div className="container-fluid view-container" id="app-view-container">
-            <Card className="jh-card">
-              <AppRoutes />
-            </Card>
-            <Footer />
+      <ConnectedRouter history={history}>
+        <Router>
+          <div className="app-container" style={{ paddingTop }}>
+            <Header
+              isAuthenticated={this.props.isAuthenticated}
+              currentLocale={this.props.currentLocale}
+              onLocaleChange={this.props.setLocale}
+            />
+            <div className="container-fluid view-container" id="app-view-container">
+              <Card className="jh-card">
+                <AppRoutes />
+              </Card>
+              <Footer />
+            </div>
+            <ModalContainer />
           </div>
-          <ModalContainer />
-        </div>
-      </Router>
+        </Router>
+      </ConnectedRouter>
     );
   }
 }
