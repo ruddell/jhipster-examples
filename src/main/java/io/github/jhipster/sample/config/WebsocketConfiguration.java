@@ -12,6 +12,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -35,13 +36,23 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 
     private final JHipsterProperties jHipsterProperties;
 
-    public WebsocketConfiguration(JHipsterProperties jHipsterProperties) {
+    private final ApplicationProperties applicationProperties;
+
+    public WebsocketConfiguration(JHipsterProperties jHipsterProperties, ApplicationProperties applicationProperties) {
         this.jHipsterProperties = jHipsterProperties;
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
+        config.enableStompBrokerRelay("/topic")
+            .setRelayHost(applicationProperties.getRabbitmq().getBrokerUrl())
+            .setRelayPort(applicationProperties.getRabbitmq().getPort())
+            .setSystemLogin(applicationProperties.getRabbitmq().getUsername())
+            .setSystemPasscode(applicationProperties.getRabbitmq().getPassword())
+            .setClientLogin(applicationProperties.getRabbitmq().getUsername())
+            .setClientPasscode(applicationProperties.getRabbitmq().getPassword());
+        config.setPathMatcher(new AntPathMatcher("."));
     }
 
     @Override

@@ -10,5 +10,38 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-
+    private final Rabbitmq rabbitmq = new Rabbitmq();
+    public Rabbitmq getRabbitmq() {
+        return rabbitmq;
+    }
+    public static class Rabbitmq {
+        private String brokerUrl = "127.0.0.1";
+        private String username = "guest";
+        private String password = "guest";
+        private int port = 61613;
+        public String getBrokerUrl() {
+            return brokerUrl;
+        }
+        public void setBrokerUrl(String brokerUrl) {
+            this.brokerUrl = brokerUrl;
+        }
+        public String getUsername() {
+            return username;
+        }
+        public void setUsername(String username) {
+            this.username = username;
+        }
+        public String getPassword() {
+            return password;
+        }
+        public void setPassword(String password) {
+            this.password = password;
+        }
+        public int getPort() {
+            return port;
+        }
+        public void setPort(int port) {
+            this.port = port;
+        }
+    }
 }

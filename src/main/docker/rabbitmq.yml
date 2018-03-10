@@ -1,0 +1,16 @@
+version: '2'
+services:
+    rabbitmq:
+        image: ruddell/docker-rabbitmq-stomp:latest
+        # optional rabbitmq configuration variables
+        # environment:
+            # for securing connections to rabbitmq
+            # - RABBITMQ_DEFAULT_USER=username
+            # - RABBITMQ_DEFAULT_PASS=SecurePasswordHere
+            # for clustering several rabbitmq containers
+            # - RABBITMQ_ERLANG_COOKIE=rabbitmq-secret-cookie
+        ports:
+            # the management port
+            - 15672:15672
+            # the stomp port
+            - 61613:61613
