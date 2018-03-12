@@ -1,0 +1,34 @@
+version: '2'
+services:
+    jhipster-app:
+        image: jhipster
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://jhipster-mysql:3306/jhipster?useUnicode=true&characterEncoding=utf8&useSSL=false
+            # For keycloak to work, you need to add '127.0.0.1 keycloak' to your hosts file
+            - SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token
+            - SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/auth
+            - SECURITY_OAUTH2_CLIENT_CLIENT_ID=web_app
+            - SECURITY_OAUTH2_CLIENT_CLIENT_SECRET=web_app
+            - SECURITY_OAUTH2_RESOURCE_USER_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+            - SECURITY_OAUTH2_RESOURCE_TOKEN_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/token/introspect
+            - SECURITY_OAUTH2_RESOURCE_JWK_KEY_SET_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/certs
+            - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
+        ports:
+            - 8080:8080
+    jhipster-mysql:
+        extends:
+            file: mysql.yml
+            service: jhipster-mysql
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
+        environment:
+            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
+    keycloak:
+        extends:
+            file: keycloak.yml
+            service: keycloak
