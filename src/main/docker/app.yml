@@ -6,9 +6,9 @@ services:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - SPRING_DATASOURCE_URL=jdbc:mysql://jhipsterwebsocketsampleapplication-mysql:3306/jhipsterwebsocketsampleapplication?useUnicode=true&characterEncoding=utf8&useSSL=false
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-            - APPLICATION_RABBITMQ_BROKER_URL=rabbitmq
-            - APPLICATION_RABBITMQ_USERNAME=rabbitmq-username
-            - APPLICATION_RABBITMQ_PASSWORD=rabbitmq-password
+            - APPLICATION_STOMP_BROKER_URL=rabbitmq
+            - APPLICATION_STOMP_BROKER_USERNAME=rabbitmq-username
+            - APPLICATION_STOMP_BROKER_PASSWORD=rabbitmq-password
         ports:
             - 8080:8080
     jhipsterwebsocketsampleapplication-app2:
@@ -17,9 +17,9 @@ services:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - SPRING_DATASOURCE_URL=jdbc:mysql://jhipsterwebsocketsampleapplication-mysql:3306/jhipsterwebsocketsampleapplication?useUnicode=true&characterEncoding=utf8&useSSL=false
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-            - APPLICATION_RABBITMQ_BROKER_URL=rabbitmq
-            - APPLICATION_RABBITMQ_USERNAME=rabbitmq-username
-            - APPLICATION_RABBITMQ_PASSWORD=rabbitmq-password
+            - APPLICATION_STOMP_BROKER_URL=rabbitmq
+            - APPLICATION_STOMP_BROKER_USERNAME=rabbitmq-username
+            - APPLICATION_STOMP_BROKER_PASSWORD=rabbitmq-password
         ports:
             - 8081:8080
     jhipsterwebsocketsampleapplication-mysql:

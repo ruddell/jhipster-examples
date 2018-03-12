@@ -46,12 +46,17 @@ public class WebsocketConfiguration extends AbstractWebSocketMessageBrokerConfig
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableStompBrokerRelay("/topic")
-            .setRelayHost(applicationProperties.getRabbitmq().getBrokerUrl())
-            .setRelayPort(applicationProperties.getRabbitmq().getPort())
-            .setSystemLogin(applicationProperties.getRabbitmq().getUsername())
-            .setSystemPasscode(applicationProperties.getRabbitmq().getPassword())
-            .setClientLogin(applicationProperties.getRabbitmq().getUsername())
-            .setClientPasscode(applicationProperties.getRabbitmq().getPassword());
+            // load connection settings for the stomp broker
+            .setRelayHost(applicationProperties.getStompBroker().getUrl())
+            .setRelayPort(applicationProperties.getStompBroker().getPort())
+            // login for backend channels
+            .setSystemLogin(applicationProperties.getStompBroker().getUsername())
+            .setSystemPasscode(applicationProperties.getStompBroker().getPassword())
+            // login for user channels
+            .setClientLogin(applicationProperties.getStompBroker().getUsername())
+            .setClientPasscode(applicationProperties.getStompBroker().getPassword());
+
+        // required for RabbitMQ only
         config.setPathMatcher(new AntPathMatcher("."));
     }
 

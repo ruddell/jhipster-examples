@@ -10,20 +10,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "application", ignoreUnknownFields = false)
 public class ApplicationProperties {
-    private final Rabbitmq rabbitmq = new Rabbitmq();
-    public Rabbitmq getRabbitmq() {
-        return rabbitmq;
+    private final StompBroker stompBroker = new StompBroker();
+    public StompBroker getStompBroker() {
+        return stompBroker;
     }
-    public static class Rabbitmq {
-        private String brokerUrl = "127.0.0.1";
+    public static class StompBroker {
+        private String url = "127.0.0.1";
         private String username = "guest";
         private String password = "guest";
         private int port = 61613;
-        public String getBrokerUrl() {
-            return brokerUrl;
+        public String getUrl() {
+            return url;
         }
-        public void setBrokerUrl(String brokerUrl) {
-            this.brokerUrl = brokerUrl;
+        public void setUrl(String url) {
+            this.url = url;
         }
         public String getUsername() {
             return username;
