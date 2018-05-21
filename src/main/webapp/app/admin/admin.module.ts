@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { JhiLanguageService } from 'ng-jhipster';
+import { JhiLanguageHelper } from 'app/core';
 import { JhipsterSharedModule } from 'app/shared';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
@@ -67,4 +68,8 @@ import {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class JhipsterAdminModule {}
+export class JhipsterAdminModule {
+  constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
+    this.languageHelper.language.subscribe((languageKey: string) => this.languageService.changeLanguage(languageKey));
+  }
+}
