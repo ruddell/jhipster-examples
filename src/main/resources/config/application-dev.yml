@@ -32,15 +32,20 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:file:./target/h2db/db/mssqlexample;DB_CLOSE_DELAY=-1
-        username: mssqlexample
-        password:
-    h2:
-        console:
-            enabled: false
+        # If you use the Docker Compose configuration provided by JHipster, the database name is "tempdb"
+        # So you should use url: jdbc:sqlserver://localhost:1433;database=tempdb
+        url: jdbc:sqlserver://localhost:1433;database=mssqlexample
+        username: SA
+        password: yourStrong(!)Password
+        hikari:
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-        database: H2
+        database-platform: org.hibernate.dialect.SQLServer2012Dialect
+        database: SQL_SERVER
         show-sql: true
         properties:
             hibernate.id.new_generator_mappings: true
