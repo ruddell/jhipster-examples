@@ -27,9 +27,11 @@ spring:
             enabled: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/jhipster?useUnicode=true&characterEncoding=utf8&useSSL=false
-        username: root
-        password:
+        # If you use the Docker Compose configuration provided by JHipster, the database name is "tempdb"
+        # So you should use url: jdbc:sqlserver://localhost:1433;database=tempdb
+        url: jdbc:sqlserver://localhost:1433;database=jhipster
+        username: SA
+        password: yourStrong(!)Password
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -37,8 +39,8 @@ spring:
                 prepStmtCacheSqlLimit: 2048
                 useServerPrepStmts: true
     jpa:
-        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-        database: MYSQL
+        database-platform: org.hibernate.dialect.SQLServer2012Dialect
+        database: SQL_SERVER
         show-sql: false
         properties:
             hibernate.id.new_generator_mappings: true

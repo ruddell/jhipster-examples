@@ -7,8 +7,11 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
-    <property name="now" value="now()" dbms="mysql"/>
-    <property name="autoIncrement" value="true"/>
+    <property name="now" value="GETDATE()" dbms="mssql"/>
+
+    <changeSet id="00000000000000" author="jhipster">
+        <createSequence sequenceName="hibernate_sequence" startValue="1000" incrementBy="50"/>
+    </changeSet>
 
     <!--
         JHipster core tables.
@@ -79,22 +82,25 @@
         <addNotNullConstraint   columnName="password_hash"
                                 columnDataType="varchar(60)"
                                 tableName="jhi_user"/>
-        <loadData encoding="UTF-8"
+        <ext:loadData encoding="UTF-8"
                   file="config/liquibase/users.csv"
                   separator=";"
+                  identityInsertEnabled="true"
                   tableName="jhi_user">
             <column name="activated" type="boolean"/>
             <column name="created_date" type="timestamp"/>
-        </loadData>
+        </ext:loadData>
         <dropDefaultValue tableName="jhi_user" columnName="created_date" columnDataType="datetime"/>
-        <loadData encoding="UTF-8"
+        <ext:loadData encoding="UTF-8"
                   file="config/liquibase/authorities.csv"
                   separator=";"
+                  identityInsertEnabled="true"
                   tableName="jhi_authority"/>
 
-        <loadData encoding="UTF-8"
+        <ext:loadData encoding="UTF-8"
                   file="config/liquibase/users_authorities.csv"
                   separator=";"
+                  identityInsertEnabled="true"
                   tableName="jhi_user_authority"/>
         <createTable tableName="jhi_persistent_audit_event">
             <column name="event_id" type="bigint" autoIncrement="${autoIncrement}">

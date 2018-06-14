@@ -5,11 +5,11 @@ services:
         environment:
             # - _JAVA_OPTIONS=-Xmx512m -Xms256m
             - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_DATASOURCE_URL=jdbc:mysql://jhipster-mysql:3306/jhipster?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATASOURCE_URL=jdbc:sqlserver://jhipster-mssql:1433;database=tempdb
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
         ports:
             - 8080:8080
-    jhipster-mysql:
+    jhipster-mssql:
         extends:
-            file: mysql.yml
-            service: jhipster-mysql
+            file: mssql.yml
+            service: jhipster-mssql
