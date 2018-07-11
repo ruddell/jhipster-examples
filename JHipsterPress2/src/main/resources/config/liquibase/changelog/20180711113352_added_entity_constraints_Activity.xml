@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Activity.
+    -->
+    <changeSet id="20180711113352-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="activities_id"
+                                 baseTableName="activity_party"
+                                 constraintName="fk_activity_party_activities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+        <addForeignKeyConstraint baseColumnNames="parties_id"
+                                 baseTableName="activity_party"
+                                 constraintName="fk_activity_party_parties_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="party"/>
+        
+        <addForeignKeyConstraint baseColumnNames="activities_id"
+                                 baseTableName="activity_profile"
+                                 constraintName="fk_activity_profile_activities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+        <addForeignKeyConstraint baseColumnNames="profiles_id"
+                                 baseTableName="activity_profile"
+                                 constraintName="fk_activity_profile_profiles_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+        
+    </changeSet>
+</databaseChangeLog>

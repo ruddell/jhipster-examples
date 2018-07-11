@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-blockeduser-heading" jhiTranslate="jHipsterPress2App.blockeduser.home.createOrEditLabel">Create or edit a Blockeduser</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!blockeduser.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="blockeduser.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.blockeduser.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="creationDate"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.blockeduser.blockinguser" for="field_blockinguser">Blockinguser</label>
+                    <select class="form-control" id="field_blockinguser" name="blockinguser" [(ngModel)]="blockeduser.blockinguserId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="partyOption.id" *ngFor="let partyOption of parties; trackBy: trackPartyById">{{partyOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.blockeduser.blockeduser" for="field_blockeduser">Blockeduser</label>
+                    <select class="form-control" id="field_blockeduser" name="blockeduser" [(ngModel)]="blockeduser.blockeduserId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="partyOption.id" *ngFor="let partyOption of parties; trackBy: trackPartyById">{{partyOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

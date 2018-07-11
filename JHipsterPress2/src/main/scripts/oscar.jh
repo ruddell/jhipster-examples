@@ -1,0 +1,86 @@
+
+entity Profile {
+    creationDate Instant required
+    image ImageBlob
+    userPoints Long min(100)
+}
+
+entity Post {
+    creationDate Instant required
+    publicationDate Instant
+    headline String minlength(2) maxlength(100) required
+    bodytext String minlength(2) maxlength(65000) required
+    image ImageBlob
+    image2 ImageBlob
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(65000) required
+    isOffensive Boolean
+}
+
+entity Message {
+    creationDate Instant required
+    messageText String minlength(2) maxlength(8000) required
+    isDeliverd Boolean
+}
+
+entity Proposal {
+	creationDate Instant required
+    releaseDate Instant
+    functionality String  minlength(2) maxlength(100) required
+    proposalType ProposalType required
+}
+
+entity Vote {
+ 	creationDate Instant required
+    numberOfPoints Integer
+}
+
+entity Topic {
+	topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+	tagName String minlength(2) maxlength(40) required
+}
+
+// ENUMS:
+enum ProposalType {
+    UNDER_STUDY, APPROVED, DEVELOPMENT, PRODUCTION
+}
+
+// RELATIONSHIPS:
+relationship OneToOne {
+    Profile{user(id) required} to User{profile}
+}
+
+relationship ManyToOne {
+	Post{user(id) required} to User
+    Comment{user(id) required} to User
+    Message{user(id) required} to User
+    Vote{user(id) required} to User
+    Proposal{user(id) required} to User
+    Comment{post(headline) required} to Post{comment}
+    Proposal{post(id) required} to Post
+    Vote{proposal(functionality) required} to Proposal{vote(id)}
+}
+
+relationship ManyToMany {
+	Tag{post(headline)} to Post{tag(tagName)}
+    Topic{post(headline)} to Post{topic(topicName)}
+}
+
+//Filtering
+filter *
+
+// Set pagination options
+//paginate all with infinite-scroll
+paginate all with pagination
+
+// DTO for all
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

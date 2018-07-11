@@ -1,0 +1,267 @@
+entity Profile {
+    creationDate Instant required
+    image ImageBlob
+    gender Gender required
+    phone String maxlength(20) required
+    bio String maxlength(7500)
+    birthdate Instant
+    civilStatus CivilStatus
+    lookingFor Gender
+    purpose Purpose
+    physical Physical
+    religion Religion
+    ethnicGroup EthnicGroup
+    studies Studies
+    sibblings Integer min(-1) max(20)
+    eyes Eyes 
+    smoker Smoker
+    children Children
+    futureChildren FutureChildren
+    pet Boolean
+}
+
+entity Party {
+    creationDate Instant required
+    partyname String minlength(2) maxlength(100) required
+    partydescription String minlength(2) maxlength(7500) required
+    image ImageBlob
+    isActive Boolean
+}
+
+entity Follow {
+    creationDate Instant
+}
+
+entity Blockeduser {
+    creationDate Instant
+}
+
+entity Blog {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+    image ImageBlob
+}
+  
+entity Post {
+    creationDate Instant required
+    publicationDate Instant
+    headline String minlength(2) maxlength(100) required
+    leadtext String minlength(2) maxlength(1000)
+    bodytext String minlength(2) maxlength(65000) required
+    quote String minlength(2) maxlength(1000)
+    conclusion String minlength(2) maxlength(2000)
+    image ImageBlob
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(65000) required
+    isOffensive Boolean
+}
+entity Message {
+    creationDate Instant required
+    messageText String minlength(2) maxlength(8000) required
+    isDeliverd Boolean
+}
+
+entity Notification {
+    creationDate Instant required
+    notificationDate Instant
+    notificationReason NotificationReason required
+    notificationText String minlength(2) maxlength(100)
+    isDeliverd Boolean
+}
+entity Album {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+
+entity Photo {
+    creationDate Instant required
+	image ImageBlob
+}
+
+entity Topic {
+	topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+	tagName String minlength(2) maxlength(40) required
+}
+
+entity Interest {
+    interestName String minlength(2) maxlength(40) required
+}
+
+entity Activity {
+    activityName String minlength(2) maxlength(40) required
+}
+
+entity Celeb {
+    celebName String minlength(2) maxlength(40) required
+}
+
+entity Urllink {
+    linkText String required
+    linkURL String required
+}
+entity Frontpageconfig {
+    creationDate Instant required
+    topNews1 Long
+    topNews2 Long
+    topNews3 Long
+    topNews4 Long 
+    topNews5 Long
+    latestNews1 Long
+    latestNews2 Long
+    latestNews3 Long
+    latestNews4 Long
+    latestNews5 Long
+    breakingNews1 Long
+    recentPosts1 Long
+    recentPosts2 Long
+    recentPosts3 Long
+    recentPosts4 Long
+    featuredArticles1 Long
+    featuredArticles2 Long
+    featuredArticles3 Long
+    featuredArticles4 Long
+    featuredArticles5 Long
+    featuredArticles6 Long
+    featuredArticles7 Long
+    featuredArticles8 Long
+    featuredArticles9 Long
+    featuredArticles10 Long
+    popularNews1 Long
+    popularNews2 Long
+    popularNews3 Long
+    popularNews4 Long
+    popularNews5 Long
+    popularNews6 Long
+    popularNews7 Long
+    popularNews8 Long
+    weeklyNews1 Long
+    weeklyNews2 Long
+    weeklyNews3 Long
+    weeklyNews4 Long
+    newsFeeds1 Long
+    newsFeeds2 Long
+    newsFeeds3 Long
+    newsFeeds4 Long
+    newsFeeds5 Long
+    newsFeeds6 Long
+    usefulLinks1 Long
+    usefulLinks2 Long
+    usefulLinks3 Long
+    usefulLinks4 Long
+    usefulLinks5 Long
+    usefulLinks6 Long
+    recentVideos1 Long
+    recentVideos2 Long
+    recentVideos3 Long
+    recentVideos4 Long
+    recentVideos5 Long
+    recentVideos6 Long
+}
+// ENUMS:
+enum Gender {
+    MALE, FEMALE, OTHER
+}
+
+enum CivilStatus {
+    SINGLE, MARRIED, DIVORCED, WIDOWER, SEPARATED, PAIRED_UP, OTHER
+}
+
+enum Purpose {
+    NOT_INTERESTED, FRIENDSHIP, MEET_PEOPLE, STABLE_RELATIONSHIP, MARRIAGE, OTHER
+}
+
+enum Physical {
+    NA, THIN, ATHLETIC, NORMAL, CORPULENT, BULKY, OTHER
+}
+
+enum Religion {
+    NA, ATHEIST, AGNOSTIC, CATHOLIC, JEWISH, ISLAMIC, OTHER
+}
+
+enum EthnicGroup {
+    NA, MIXED, WHITE, LATIN, GIPSY, AFRO, HINDU, ARAB, ASIAN, INDIAN, OTHER
+}
+
+enum Studies {
+    NA, PRIMARY, HIGH_SCHOOL, TECHNICAL, COLLEGE, MASTER, DOCTORATE, OTHER
+}
+
+enum Eyes {
+    NA, BLUE, GREEN, BROWN, BLACK, CHESTNUT, OTHER
+}
+
+enum Smoker {
+    NA, YES, NO, OCCASIONALLY
+}
+
+enum Children {
+    NA, YES, NO, GREATER_THAN_18
+}
+
+enum FutureChildren {
+    NA, YES, NO
+}
+
+enum NotificationReason {
+    FOLLOWING, UNFOLLOWING, PROPOSAL_RELEASED, FOLLOWER_STATUS, AUTHORIZE_PARTY_FOLLOWER, UNAUTHORIZE_PARTY_FOLLOWER
+}
+
+enum ProposalType {
+    UNDER_STUDY, APPROVED, DEVELOPMENT, PRODUCTION
+}
+
+// RELATIONSHIPS:
+relationship OneToOne {
+    Profile{user(id) required} to User{profile}
+    Album{party} to Party{album}
+}
+
+relationship ManyToOne {
+    Party{user(id) required} to User
+    Notification{user(id) required} to User
+}
+
+relationship OneToMany {
+    Party to Blog{party required}
+    Blog to Post{blog(title) required}
+    Post{comment} to Comment{post(headline) required}
+    Party to Comment{party required}
+    Party{message} to Message{party required}
+    Party{followed(id)} to Follow{followed(id)}
+    Party{following(id)} to Follow{following(id)}
+    Party{blockinguser(id)} to Blockeduser{blockinguser(id)}
+    Party{blockeduser(id)} to Blockeduser{blockeduser(id)}
+    Album{photo} to Photo{album}
+}
+
+relationship ManyToMany {
+    Tag{post(headline)} to Post{tag(tagName)}
+    Topic{post(headline)} to Post{topic(topicName)}
+    Interest{party} to Party{interest(interestName)}
+    Activity{party} to Party{activity(activityName)}
+    Celeb{party} to Party{celeb(celebName)}
+    Interest{profile} to Profile{interest(interestName)}
+    Activity{profile} to Profile{activity(activityName)}
+    Celeb{profile} to Profile{celeb(celebName)}
+}
+
+// SET PAGINATION OPTIONS:
+
+//paginate all with infinite-scroll
+paginate all with pagination
+
+// SET SERVICE OPTIONS:
+service all with serviceImpl
+//service all with serviceClass
+
+// DTO:
+dto all with mapstruct
+
+// FILTERING:
+filter *

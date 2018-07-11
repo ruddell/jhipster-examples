@@ -1,0 +1,18 @@
+{
+    "jHipsterPress2App": {
+        "EthnicGroup" : {
+            "null": "",
+            "NA": "NA",
+            "MIXED": "MIXED",
+            "WHITE": "WHITE",
+            "LATIN": "LATIN",
+            "GIPSY": "GIPSY",
+            "AFRO": "AFRO",
+            "HINDU": "HINDU",
+            "ARAB": "ARAB",
+            "ASIAN": "ASIAN",
+            "INDIAN": "INDIAN",
+            "OTHER": "OTHER"
+        }
+    }
+}

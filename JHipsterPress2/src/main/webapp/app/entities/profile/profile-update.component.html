@@ -1,0 +1,264 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-profile-heading" jhiTranslate="jHipsterPress2App.profile.home.createOrEditLabel">Create or edit a Profile</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!profile.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="profile.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.creationDate" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="creationDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.creationDate?.dirty && editForm.controls.creationDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.creationDate?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.creationDate?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.image" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + profile.imageContentType + ';base64,' + profile.image" style="max-height: 100px;" *ngIf="profile.image" alt="profile image"/>
+                        <div *ngIf="profile.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{profile.imageContentType}}, {{byteSize(profile.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, profile, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="profile.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="profile.imageContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.gender" for="field_gender">Gender</label>
+                    <select class="form-control" name="gender" [(ngModel)]="profile.gender" id="field_gender"  required>
+                        <option value="MALE">{{'jHipsterPress2App.Gender.MALE' | translate}}</option>
+                        <option value="FEMALE">{{'jHipsterPress2App.Gender.FEMALE' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Gender.OTHER' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.gender?.dirty && editForm.controls.gender?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.gender?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                        [(ngModel)]="profile.phone" required maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.phone?.dirty && editForm.controls.phone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.phone?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.phone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                        This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.bio" for="field_bio">Bio</label>
+                    <input type="text" class="form-control" name="bio" id="field_bio"
+                        [(ngModel)]="profile.bio" maxlength="7500"/>
+                    <div [hidden]="!(editForm.controls.bio?.dirty && editForm.controls.bio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bio?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 7500 }">
+                        This field cannot be longer than 7500 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.birthdate" for="field_birthdate">Birthdate</label>
+                    <div class="d-flex">
+                        <input id="field_birthdate" type="datetime-local" class="form-control" name="birthdate" [(ngModel)]="birthdate"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.civilStatus" for="field_civilStatus">Civil Status</label>
+                    <select class="form-control" name="civilStatus" [(ngModel)]="profile.civilStatus" id="field_civilStatus" >
+                        <option value="SINGLE">{{'jHipsterPress2App.CivilStatus.SINGLE' | translate}}</option>
+                        <option value="MARRIED">{{'jHipsterPress2App.CivilStatus.MARRIED' | translate}}</option>
+                        <option value="DIVORCED">{{'jHipsterPress2App.CivilStatus.DIVORCED' | translate}}</option>
+                        <option value="WIDOWER">{{'jHipsterPress2App.CivilStatus.WIDOWER' | translate}}</option>
+                        <option value="SEPARATED">{{'jHipsterPress2App.CivilStatus.SEPARATED' | translate}}</option>
+                        <option value="PAIRED_UP">{{'jHipsterPress2App.CivilStatus.PAIRED_UP' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.CivilStatus.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.lookingFor" for="field_lookingFor">Looking For</label>
+                    <select class="form-control" name="lookingFor" [(ngModel)]="profile.lookingFor" id="field_lookingFor" >
+                        <option value="MALE">{{'jHipsterPress2App.Gender.MALE' | translate}}</option>
+                        <option value="FEMALE">{{'jHipsterPress2App.Gender.FEMALE' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Gender.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.purpose" for="field_purpose">Purpose</label>
+                    <select class="form-control" name="purpose" [(ngModel)]="profile.purpose" id="field_purpose" >
+                        <option value="NOT_INTERESTED">{{'jHipsterPress2App.Purpose.NOT_INTERESTED' | translate}}</option>
+                        <option value="FRIENDSHIP">{{'jHipsterPress2App.Purpose.FRIENDSHIP' | translate}}</option>
+                        <option value="MEET_PEOPLE">{{'jHipsterPress2App.Purpose.MEET_PEOPLE' | translate}}</option>
+                        <option value="STABLE_RELATIONSHIP">{{'jHipsterPress2App.Purpose.STABLE_RELATIONSHIP' | translate}}</option>
+                        <option value="MARRIAGE">{{'jHipsterPress2App.Purpose.MARRIAGE' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Purpose.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.physical" for="field_physical">Physical</label>
+                    <select class="form-control" name="physical" [(ngModel)]="profile.physical" id="field_physical" >
+                        <option value="NA">{{'jHipsterPress2App.Physical.NA' | translate}}</option>
+                        <option value="THIN">{{'jHipsterPress2App.Physical.THIN' | translate}}</option>
+                        <option value="ATHLETIC">{{'jHipsterPress2App.Physical.ATHLETIC' | translate}}</option>
+                        <option value="NORMAL">{{'jHipsterPress2App.Physical.NORMAL' | translate}}</option>
+                        <option value="CORPULENT">{{'jHipsterPress2App.Physical.CORPULENT' | translate}}</option>
+                        <option value="BULKY">{{'jHipsterPress2App.Physical.BULKY' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Physical.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.religion" for="field_religion">Religion</label>
+                    <select class="form-control" name="religion" [(ngModel)]="profile.religion" id="field_religion" >
+                        <option value="NA">{{'jHipsterPress2App.Religion.NA' | translate}}</option>
+                        <option value="ATHEIST">{{'jHipsterPress2App.Religion.ATHEIST' | translate}}</option>
+                        <option value="AGNOSTIC">{{'jHipsterPress2App.Religion.AGNOSTIC' | translate}}</option>
+                        <option value="CATHOLIC">{{'jHipsterPress2App.Religion.CATHOLIC' | translate}}</option>
+                        <option value="JEWISH">{{'jHipsterPress2App.Religion.JEWISH' | translate}}</option>
+                        <option value="ISLAMIC">{{'jHipsterPress2App.Religion.ISLAMIC' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Religion.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.ethnicGroup" for="field_ethnicGroup">Ethnic Group</label>
+                    <select class="form-control" name="ethnicGroup" [(ngModel)]="profile.ethnicGroup" id="field_ethnicGroup" >
+                        <option value="NA">{{'jHipsterPress2App.EthnicGroup.NA' | translate}}</option>
+                        <option value="MIXED">{{'jHipsterPress2App.EthnicGroup.MIXED' | translate}}</option>
+                        <option value="WHITE">{{'jHipsterPress2App.EthnicGroup.WHITE' | translate}}</option>
+                        <option value="LATIN">{{'jHipsterPress2App.EthnicGroup.LATIN' | translate}}</option>
+                        <option value="GIPSY">{{'jHipsterPress2App.EthnicGroup.GIPSY' | translate}}</option>
+                        <option value="AFRO">{{'jHipsterPress2App.EthnicGroup.AFRO' | translate}}</option>
+                        <option value="HINDU">{{'jHipsterPress2App.EthnicGroup.HINDU' | translate}}</option>
+                        <option value="ARAB">{{'jHipsterPress2App.EthnicGroup.ARAB' | translate}}</option>
+                        <option value="ASIAN">{{'jHipsterPress2App.EthnicGroup.ASIAN' | translate}}</option>
+                        <option value="INDIAN">{{'jHipsterPress2App.EthnicGroup.INDIAN' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.EthnicGroup.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.studies" for="field_studies">Studies</label>
+                    <select class="form-control" name="studies" [(ngModel)]="profile.studies" id="field_studies" >
+                        <option value="NA">{{'jHipsterPress2App.Studies.NA' | translate}}</option>
+                        <option value="PRIMARY">{{'jHipsterPress2App.Studies.PRIMARY' | translate}}</option>
+                        <option value="HIGH_SCHOOL">{{'jHipsterPress2App.Studies.HIGH_SCHOOL' | translate}}</option>
+                        <option value="TECHNICAL">{{'jHipsterPress2App.Studies.TECHNICAL' | translate}}</option>
+                        <option value="COLLEGE">{{'jHipsterPress2App.Studies.COLLEGE' | translate}}</option>
+                        <option value="MASTER">{{'jHipsterPress2App.Studies.MASTER' | translate}}</option>
+                        <option value="DOCTORATE">{{'jHipsterPress2App.Studies.DOCTORATE' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Studies.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.sibblings" for="field_sibblings">Sibblings</label>
+                    <input type="number" class="form-control" name="sibblings" id="field_sibblings"
+                        [(ngModel)]="profile.sibblings" min="-1" jhiMin="-1" max="20" jhiMax="20"/>
+                    <div [hidden]="!(editForm.controls.sibblings?.dirty && editForm.controls.sibblings?.invalid)">
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.sibblings?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: -1 }">
+                            This field should be at least -1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.sibblings?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 20 }">
+                            This field cannot be more than 20.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.sibblings?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.eyes" for="field_eyes">Eyes</label>
+                    <select class="form-control" name="eyes" [(ngModel)]="profile.eyes" id="field_eyes" >
+                        <option value="NA">{{'jHipsterPress2App.Eyes.NA' | translate}}</option>
+                        <option value="BLUE">{{'jHipsterPress2App.Eyes.BLUE' | translate}}</option>
+                        <option value="GREEN">{{'jHipsterPress2App.Eyes.GREEN' | translate}}</option>
+                        <option value="BROWN">{{'jHipsterPress2App.Eyes.BROWN' | translate}}</option>
+                        <option value="BLACK">{{'jHipsterPress2App.Eyes.BLACK' | translate}}</option>
+                        <option value="CHESTNUT">{{'jHipsterPress2App.Eyes.CHESTNUT' | translate}}</option>
+                        <option value="OTHER">{{'jHipsterPress2App.Eyes.OTHER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.smoker" for="field_smoker">Smoker</label>
+                    <select class="form-control" name="smoker" [(ngModel)]="profile.smoker" id="field_smoker" >
+                        <option value="NA">{{'jHipsterPress2App.Smoker.NA' | translate}}</option>
+                        <option value="YES">{{'jHipsterPress2App.Smoker.YES' | translate}}</option>
+                        <option value="NO">{{'jHipsterPress2App.Smoker.NO' | translate}}</option>
+                        <option value="OCCASIONALLY">{{'jHipsterPress2App.Smoker.OCCASIONALLY' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.children" for="field_children">Children</label>
+                    <select class="form-control" name="children" [(ngModel)]="profile.children" id="field_children" >
+                        <option value="NA">{{'jHipsterPress2App.Children.NA' | translate}}</option>
+                        <option value="YES">{{'jHipsterPress2App.Children.YES' | translate}}</option>
+                        <option value="NO">{{'jHipsterPress2App.Children.NO' | translate}}</option>
+                        <option value="GREATER_THAN_18">{{'jHipsterPress2App.Children.GREATER_THAN_18' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.futureChildren" for="field_futureChildren">Future Children</label>
+                    <select class="form-control" name="futureChildren" [(ngModel)]="profile.futureChildren" id="field_futureChildren" >
+                        <option value="NA">{{'jHipsterPress2App.FutureChildren.NA' | translate}}</option>
+                        <option value="YES">{{'jHipsterPress2App.FutureChildren.YES' | translate}}</option>
+                        <option value="NO">{{'jHipsterPress2App.FutureChildren.NO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.pet" for="field_pet">Pet</label>
+                    <input type="checkbox" class="form-control" name="pet" id="field_pet"
+                        [(ngModel)]="profile.pet" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jHipsterPress2App.profile.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="profile.userId"  required>
+                        <option *ngIf="!editForm.value.user" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.user?.dirty && editForm.controls.user?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.user?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+
+{
+    "jHipsterPress2App": {
+        "blockeduser" : {
+            "home": {
+                "title": "Blockedusers",
+                "createLabel": "Create a new Blockeduser",
+                "createOrEditLabel": "Create or edit a Blockeduser"
+            },
+            "created": "A new Blockeduser is created with identifier {{ param }}",
+            "updated": "A Blockeduser is updated with identifier {{ param }}",
+            "deleted": "A Blockeduser is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Blockeduser {{ id }}?"
+            },
+            "detail": {
+                "title": "Blockeduser"
+            },
+            "creationDate": "Creation Date",
+            "blockinguser": "Blockinguser",
+            "blockeduser": "Blockeduser"
+        }
+    }
+}

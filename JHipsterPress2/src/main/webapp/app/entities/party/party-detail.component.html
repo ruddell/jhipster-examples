@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="party">
+            <h2><span jhiTranslate="jHipsterPress2App.party.detail.title">Party</span> {{party.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jHipsterPress2App.party.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{party.creationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.party.partyname">Partyname</span></dt>
+                <dd>
+                    <span>{{party.partyname}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.party.partydescription">Partydescription</span></dt>
+                <dd>
+                    <span>{{party.partydescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.party.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="party.image">
+                        <a (click)="openFile(party.imageContentType, party.image)">
+                            <img [src]="'data:' + party.imageContentType + ';base64,' + party.image" style="max-width: 100%;" alt="party image"/>
+                        </a>
+                        {{party.imageContentType}}, {{byteSize(party.image)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.party.isActive">Is Active</span></dt>
+                <dd>
+                    <span>{{party.isActive}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.party.user">User</span></dt>
+                <dd>
+                    {{party.userId}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/party', party.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

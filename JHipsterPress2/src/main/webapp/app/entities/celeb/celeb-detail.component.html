@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="celeb">
+            <h2><span jhiTranslate="jHipsterPress2App.celeb.detail.title">Celeb</span> {{celeb.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jHipsterPress2App.celeb.celebName">Celeb Name</span></dt>
+                <dd>
+                    <span>{{celeb.celebName}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.celeb.party">Party</span></dt>
+                <dd>
+                    <span *ngFor="let party of celeb.parties; let last = last">
+                        <a [routerLink]="['/party', party?.id, 'view' ]">{{party.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.celeb.profile">Profile</span></dt>
+                <dd>
+                    <span *ngFor="let profile of celeb.profiles; let last = last">
+                        <a [routerLink]="['/profile', profile?.id, 'view' ]">{{profile.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/celeb', celeb.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

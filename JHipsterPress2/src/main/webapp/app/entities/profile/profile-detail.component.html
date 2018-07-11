@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="profile">
+            <h2><span jhiTranslate="jHipsterPress2App.profile.detail.title">Profile</span> {{profile.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jHipsterPress2App.profile.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{profile.creationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="profile.image">
+                        <a (click)="openFile(profile.imageContentType, profile.image)">
+                            <img [src]="'data:' + profile.imageContentType + ';base64,' + profile.image" style="max-width: 100%;" alt="profile image"/>
+                        </a>
+                        {{profile.imageContentType}}, {{byteSize(profile.image)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.gender">Gender</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Gender.' + profile.gender}}">{{profile.gender}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.phone">Phone</span></dt>
+                <dd>
+                    <span>{{profile.phone}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.bio">Bio</span></dt>
+                <dd>
+                    <span>{{profile.bio}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.birthdate">Birthdate</span></dt>
+                <dd>
+                    <span>{{profile.birthdate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.civilStatus">Civil Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.CivilStatus.' + profile.civilStatus}}">{{profile.civilStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.lookingFor">Looking For</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Gender.' + profile.lookingFor}}">{{profile.lookingFor}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.purpose">Purpose</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Purpose.' + profile.purpose}}">{{profile.purpose}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.physical">Physical</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Physical.' + profile.physical}}">{{profile.physical}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.religion">Religion</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Religion.' + profile.religion}}">{{profile.religion}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.ethnicGroup">Ethnic Group</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.EthnicGroup.' + profile.ethnicGroup}}">{{profile.ethnicGroup}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.studies">Studies</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Studies.' + profile.studies}}">{{profile.studies}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.sibblings">Sibblings</span></dt>
+                <dd>
+                    <span>{{profile.sibblings}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.eyes">Eyes</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Eyes.' + profile.eyes}}">{{profile.eyes}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.smoker">Smoker</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Smoker.' + profile.smoker}}">{{profile.smoker}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.children">Children</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.Children.' + profile.children}}">{{profile.children}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.futureChildren">Future Children</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'jHipsterPress2App.FutureChildren.' + profile.futureChildren}}">{{profile.futureChildren}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.pet">Pet</span></dt>
+                <dd>
+                    <span>{{profile.pet}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.profile.user">User</span></dt>
+                <dd>
+                    {{profile.userId}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/profile', profile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

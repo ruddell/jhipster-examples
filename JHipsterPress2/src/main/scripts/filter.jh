@@ -1,0 +1,46 @@
+
+entity Post {
+    creationDate Instant required
+    publicationDate Instant
+    headline String minlength(2) maxlength(100) required
+    bodytext String minlength(2) maxlength(65000) required
+    image ImageBlob
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(65000) required
+    isOffensive Boolean
+}
+
+entity Topic {
+	topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+	tagName String minlength(2) maxlength(40) required
+}
+
+// RELATIONSHIPS:
+relationship ManyToOne {
+	Post{user(id) required} to User
+    Comment{user(id) required} to User
+    Comment{post(headline) required} to Post{comment}
+}
+
+relationship ManyToMany {
+	Tag{post(headline)} to Post{tag(tagName)}
+    Topic{post(headline)} to Post{topic(topicName)}
+}
+
+// Set pagination options
+//paginate all with infinite-scroll
+paginate all with pagination
+
+filter *
+
+// DTO for all
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

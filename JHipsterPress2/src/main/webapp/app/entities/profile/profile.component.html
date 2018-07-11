@@ -1,0 +1,107 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jHipsterPress2App.profile.home.title">Profiles</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-profile" [routerLink]="['/profile/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="jHipsterPress2App.profile.home.createLabel">
+            Create new Profile
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="profiles">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="creationDate"><span jhiTranslate="jHipsterPress2App.profile.creationDate">Creation Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="image"><span jhiTranslate="jHipsterPress2App.profile.image">Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gender"><span jhiTranslate="jHipsterPress2App.profile.gender">Gender</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="phone"><span jhiTranslate="jHipsterPress2App.profile.phone">Phone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="bio"><span jhiTranslate="jHipsterPress2App.profile.bio">Bio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="birthdate"><span jhiTranslate="jHipsterPress2App.profile.birthdate">Birthdate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="civilStatus"><span jhiTranslate="jHipsterPress2App.profile.civilStatus">Civil Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lookingFor"><span jhiTranslate="jHipsterPress2App.profile.lookingFor">Looking For</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="purpose"><span jhiTranslate="jHipsterPress2App.profile.purpose">Purpose</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="physical"><span jhiTranslate="jHipsterPress2App.profile.physical">Physical</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="religion"><span jhiTranslate="jHipsterPress2App.profile.religion">Religion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ethnicGroup"><span jhiTranslate="jHipsterPress2App.profile.ethnicGroup">Ethnic Group</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="studies"><span jhiTranslate="jHipsterPress2App.profile.studies">Studies</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sibblings"><span jhiTranslate="jHipsterPress2App.profile.sibblings">Sibblings</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="eyes"><span jhiTranslate="jHipsterPress2App.profile.eyes">Eyes</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="smoker"><span jhiTranslate="jHipsterPress2App.profile.smoker">Smoker</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="children"><span jhiTranslate="jHipsterPress2App.profile.children">Children</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="futureChildren"><span jhiTranslate="jHipsterPress2App.profile.futureChildren">Future Children</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pet"><span jhiTranslate="jHipsterPress2App.profile.pet">Pet</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="userId"><span jhiTranslate="jHipsterPress2App.profile.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let profile of profiles ;trackBy: trackId">
+                <td><a [routerLink]="['/profile', profile.id, 'view' ]">{{profile.id}}</a></td>
+                <td>{{profile.creationDate | date:'medium'}}</td>
+                <td>
+                    <a *ngIf="profile.image" (click)="openFile(profile.imageContentType, profile.image)">
+                        <img [src]="'data:' + profile.imageContentType + ';base64,' + profile.image" style="max-height: 30px;" alt="profile image"/>
+                    </a>
+                    <span *ngIf="profile.image">{{profile.imageContentType}}, {{byteSize(profile.image)}}</span>
+                </td>
+                <td jhiTranslate="{{'jHipsterPress2App.Gender.' + profile.gender}}">{{profile.gender}}</td>
+                <td>{{profile.phone}}</td>
+                <td>{{profile.bio}}</td>
+                <td>{{profile.birthdate | date:'medium'}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.CivilStatus.' + profile.civilStatus}}">{{profile.civilStatus}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Gender.' + profile.lookingFor}}">{{profile.lookingFor}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Purpose.' + profile.purpose}}">{{profile.purpose}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Physical.' + profile.physical}}">{{profile.physical}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Religion.' + profile.religion}}">{{profile.religion}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.EthnicGroup.' + profile.ethnicGroup}}">{{profile.ethnicGroup}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Studies.' + profile.studies}}">{{profile.studies}}</td>
+                <td>{{profile.sibblings}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Eyes.' + profile.eyes}}">{{profile.eyes}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Smoker.' + profile.smoker}}">{{profile.smoker}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.Children.' + profile.children}}">{{profile.children}}</td>
+                <td jhiTranslate="{{'jHipsterPress2App.FutureChildren.' + profile.futureChildren}}">{{profile.futureChildren}}</td>
+                <td>{{profile.pet}}</td>
+                <td>
+                    {{profile.userId}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/profile', profile.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/profile', profile.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'profile/'+ profile.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="profiles && profiles.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

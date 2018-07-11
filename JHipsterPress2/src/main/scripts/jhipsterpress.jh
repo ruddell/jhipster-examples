@@ -1,0 +1,51 @@
+
+
+entity Blog {
+	userId Long required
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+  
+entity Post {
+	blogId Long required
+    creationDate Instant required
+    headline String minlength(2) maxlength(100) required
+    bodytext String minlength(2) maxlength(1000) required
+    image ImageBlob
+}
+
+entity Comment {
+	postID Long required
+    creationDate Instant required
+    commentText String minlength(2) maxlength(1000) required
+}
+
+entity Topic {
+	topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+	tagName String minlength(2) maxlength(40) required
+}
+
+entity Urllink {
+    linkText String required
+    linkURL String required
+}
+// ENUMS:
+
+// RELATIONSHIPS:
+
+// Set pagination options
+//paginate all with infinite-scroll
+paginate all with pagination
+
+// DTO for all
+// dto * with mapstruct
+
+// Set service options to all except few
+// service all with serviceImpl
+service all with serviceClass
+
+//Filtering
+filter *

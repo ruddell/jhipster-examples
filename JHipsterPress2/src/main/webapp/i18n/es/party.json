@@ -1,0 +1,38 @@
+
+{
+    "jHipsterPress2App": {
+        "party" : {
+            "home": {
+                "title": "Parties",
+                "createLabel": "Crear nuevo Party",
+                "createOrEditLabel": "Crear o editar Party"
+            },
+            "created": "Un nuevo Party ha sido creado con el identificador {{ param }}",
+            "updated": "Un Party ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Party ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Party {{ id }}?"
+            },
+            "detail": {
+                "title": "Party"
+            },
+            "creationDate": "Creation Date",
+            "partyname": "Partyname",
+            "partydescription": "Partydescription",
+            "image": "Image",
+            "isActive": "Is Active",
+            "blog": "Blog",
+            "comment": "Comment",
+            "message": "Message",
+            "followed": "Followed",
+            "following": "Following",
+            "blockinguser": "Blockinguser",
+            "blockeduser": "Blockeduser",
+            "user": "User",
+            "album": "Album",
+            "interest": "Interest",
+            "activity": "Activity",
+            "celeb": "Celeb"
+        }
+    }
+}

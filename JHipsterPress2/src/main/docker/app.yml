@@ -1,0 +1,15 @@
+version: '2'
+services:
+    jhipsterpress2-app:
+        image: jhipsterpress2
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://jhipsterpress2-postgresql:5432/JHipsterPress2
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    jhipsterpress2-postgresql:
+        extends:
+            file: postgresql.yml
+            service: jhipsterpress2-postgresql

@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="blockeduser">
+            <h2><span jhiTranslate="jHipsterPress2App.blockeduser.detail.title">Blockeduser</span> {{blockeduser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jHipsterPress2App.blockeduser.creationDate">Creation Date</span></dt>
+                <dd>
+                    <span>{{blockeduser.creationDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.blockeduser.blockinguser">Blockinguser</span></dt>
+                <dd>
+                    <div *ngIf="blockeduser.blockinguserId">
+                        <a [routerLink]="['/party', blockeduser.blockinguserId, 'view']">{{blockeduser.blockinguserId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="jHipsterPress2App.blockeduser.blockeduser">Blockeduser</span></dt>
+                <dd>
+                    <div *ngIf="blockeduser.blockeduserId">
+                        <a [routerLink]="['/party', blockeduser.blockeduserId, 'view']">{{blockeduser.blockeduserId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/blockeduser', blockeduser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

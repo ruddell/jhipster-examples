@@ -1,0 +1,305 @@
+
+entity Profile {
+    creationDate Instant required
+    image ImageBlob
+    gender Gender required
+    phone String maxlength(20) required
+    bio String maxlength(7500)
+    birthdate Instant
+    civilStatus CivilStatus
+    lookingFor Gender
+    purpose Purpose
+    physical Physical
+    religion Religion
+    ethnicGroup EthnicGroup
+    studies Studies
+    sibblings Integer min(0) max(20)
+    eyes Eyes 
+    smoker Smoker
+    children Children
+    futureChildren FutureChildren
+    pet Boolean
+    userPoints Long min(100)
+}
+
+entity Party {
+    creationDate Instant required
+    partyname String minlength(2) maxlength(100) required
+    partydescription String minlength(2) maxlength(7500) required
+    image ImageBlob
+    isActive Boolean
+}
+
+entity Follow {
+    creationDate Instant
+}
+
+entity Blockeduser {
+    creationDate Instant
+}
+
+entity Blog {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+    image ImageBlob
+}
+  
+entity Post {
+    creationDate Instant required
+    publicationDate Instant
+    headline String minlength(2) maxlength(100) required
+    leadtext String minlength(2) maxlength(1000)
+    bodytext String minlength(2) maxlength(65000) required
+    quote String minlength(2) maxlength(1000)
+    conclusion String minlength(2) maxlength(2000)
+    image ImageBlob
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(65000) required
+    isOffensive Boolean
+}
+
+entity Frontpageconfig {
+    creationDate Instant required
+}
+
+entity Album {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+
+entity Photo {
+    creationDate Instant required
+	image ImageBlob
+}
+
+entity Message {
+    creationDate Instant required
+    messageText String minlength(2) maxlength(8000) required
+    isDeliverd Boolean
+}
+
+entity Notification {
+    creationDate Instant required
+    notificationDate Instant
+    notificationReason NotificationReason required
+    notificationText String minlength(2) maxlength(100)
+    isDeliverd Boolean
+}
+
+entity Proposal {
+	creationDate Instant required
+    releaseDate Instant
+    functionality String  minlength(2) maxlength(100) required
+    proposalType ProposalType
+}
+
+entity Vote {
+ 	creationDate Instant required
+    numberOfPoints Integer
+}
+
+entity Topic {
+	topicName String minlength(2) maxlength(40) required
+}
+
+entity Tag {
+	tagName String minlength(2) maxlength(40) required
+}
+
+entity Interest {
+    interestName String minlength(2) maxlength(40) required
+}
+
+entity Activity {
+    activityName String minlength(2) maxlength(40) required
+}
+
+entity Celeb {
+    celebName String minlength(2) maxlength(40) required
+}
+
+entity Country {
+	countryName String minlength(2) maxlength(40) required
+}
+
+entity State {
+	stateName String minlength(2) maxlength(40) required
+}
+
+entity City {
+	cityName String minlength(2) maxlength(40) required
+}
+
+entity Address{
+    addressLine1 String minlength(2) maxlength(80) required
+    addressLine2 String minlength(2) maxlength(40)
+    postalCode String minlength(2) maxlength(10) required
+    latitude Double
+    longitude Double
+}
+
+entity Urllink {
+    linkText String required
+    linkURL String required
+}
+
+// ENUMS:
+enum Gender {
+    MALE, FEMALE, OTHER
+}
+
+enum CivilStatus {
+    SINGLE, MARRIED, DIVORCED, WIDOWER, SEPARATED, PAIRED_UP, OTHER
+}
+
+enum Purpose {
+    NOT_INTERESTED, FRIENDSHIP, MEET_PEOPLE, STABLE_RELATIONSHIP, MARRIAGE, OTHER
+}
+
+enum Physical {
+    NA, THIN, ATHLETIC, NORMAL, CORPULENT, BULKY, OTHER
+}
+
+enum Religion {
+    NA, ATHEIST, AGNOSTIC, CATHOLIC, JEWISH, ISLAMIC, OTHER
+}
+
+enum EthnicGroup {
+    NA, MIXED, WHITE, LATIN, GIPSY, AFRO, HINDU, ARAB, ASIAN, INDIAN, OTHER
+}
+
+enum Studies {
+    NA, PRIMARY, HIGH_SCHOOL, TECHNICAL, COLLEGE, MASTER, DOCTORATE, OTHER
+}
+
+enum Eyes {
+    NA, BLUE, GREEN, BROWN, BLACK, CHESTNUT, OTHER
+}
+
+enum Smoker {
+    NA, YES, NO, OCCASIONALLY
+}
+
+enum Children {
+    NA, YES, NO, GREATER_THAN_18
+}
+
+enum FutureChildren {
+    NA, YES, NO
+}
+
+enum NotificationReason {
+    FOLLOWING, UNFOLLOWING, PROPOSAL_RELEASED, FOLLOWER_STATUS, AUTHORIZE_PARTY_FOLLOWER, UNAUTHORIZE_PARTY_FOLLOWER
+}
+
+enum ProposalType {
+    UNDER_STUDY, APPROVED, DEVELOPMENT, PRODUCTION
+}
+
+// RELATIONSHIPS:
+relationship OneToOne {
+    Profile{user(id) required} to User{profile}
+    Address{user(id) required} to User{address}
+    Album{party} to Party{album}
+    Frontpageconfig{topNews1(id)} to Post{topNews1(id)}
+    Frontpageconfig{topNews2(id)} to Post{topNews2(id)}
+    Frontpageconfig{topNews3(id)} to Post{topNews3(id)}
+    Frontpageconfig{topNews4(id)} to Post{topNews4(id)}
+    Frontpageconfig{topNews5(id)} to Post{topNews5(id)}
+    Frontpageconfig{latestNews1(id)} to Post{latestNews1(id)}
+    Frontpageconfig{latestNews2(id)} to Post{latestNews2(id)}
+    Frontpageconfig{latestNews3(id)} to Post{latestNews3(id)}
+    Frontpageconfig{latestNews4(id)} to Post{latestNews4(id)}
+    Frontpageconfig{latestNews5(id)} to Post{latestNews5(id)}
+    Frontpageconfig{breakingNews1(id)} to Post{breakingNews1(id)}
+    Frontpageconfig{recentPosts1(id)} to Post{recentPosts1(id)}
+    Frontpageconfig{recentPosts2(id)} to Post{recentPosts2(id)}
+    Frontpageconfig{recentPosts3(id)} to Post{recentPosts3(id)}
+    Frontpageconfig{recentPosts4(id)} to Post{recentPosts4(id)}
+    Frontpageconfig{featuredArticles1(id)} to Post{featuredArticles1(id)}
+    Frontpageconfig{featuredArticles2(id)} to Post{featuredArticles2(id)}
+    Frontpageconfig{featuredArticles3(id)} to Post{featuredArticles3(id)}
+    Frontpageconfig{featuredArticles4(id)} to Post{featuredArticles4(id)}
+    Frontpageconfig{featuredArticles5(id)} to Post{featuredArticles5(id)}
+    Frontpageconfig{featuredArticles6(id)} to Post{featuredArticles6(id)}
+    Frontpageconfig{featuredArticles7(id)} to Post{featuredArticles7(id)}
+    Frontpageconfig{featuredArticles8(id)} to Post{featuredArticles8(id)}
+    Frontpageconfig{featuredArticles9(id)} to Post{featuredArticles9(id)}
+    Frontpageconfig{featuredArticles10(id)} to Post{featuredArticles10(id)}
+    Frontpageconfig{popularNews1(id)} to Post{popularNews1(id)}
+    Frontpageconfig{popularNews2(id)} to Post{popularNews2(id)}
+    Frontpageconfig{popularNews3(id)} to Post{popularNews3(id)}
+    Frontpageconfig{popularNews4(id)} to Post{popularNews4(id)}
+    Frontpageconfig{popularNews5(id)} to Post{popularNews5(id)}
+    Frontpageconfig{popularNews6(id)} to Post{popularNews6(id)}
+    Frontpageconfig{popularNews7(id)} to Post{popularNews7(id)}
+    Frontpageconfig{popularNews8(id)} to Post{popularNews8(id)}
+    Frontpageconfig{weeklyNews1(id)} to Post{weeklyNews1(id)}
+    Frontpageconfig{weeklyNews2(id)} to Post{weeklyNews2(id)}
+    Frontpageconfig{weeklyNews3(id)} to Post{weeklyNews3(id)}
+    Frontpageconfig{weeklyNews4(id)} to Post{weeklyNews4(id)}
+    Frontpageconfig{newsFeeds1(id)} to Post{newsFeeds1(id)}
+    Frontpageconfig{newsFeeds2(id)} to Post{newsFeeds2(id)}
+    Frontpageconfig{newsFeeds3(id)} to Post{newsFeeds3(id)}
+    Frontpageconfig{newsFeeds4(id)} to Post{newsFeeds4(id)}
+    Frontpageconfig{newsFeeds5(id)} to Post{newsFeeds5(id)}
+    Frontpageconfig{newsFeeds6(id)} to Post{newsFeeds6(id)}
+    Frontpageconfig{usefulLinks1(id)} to Urllink{usefulLinks1(id)}
+    Frontpageconfig{usefulLinks2(id)} to Urllink{usefulLinks2(id)}
+    Frontpageconfig{usefulLinks3(id)} to Urllink{usefulLinks3(id)}
+    Frontpageconfig{usefulLinks4(id)} to Urllink{usefulLinks4(id)}
+    Frontpageconfig{usefulLinks5(id)} to Urllink{usefulLinks5(id)}
+    Frontpageconfig{usefulLinks6(id)} to Urllink{usefulLinks6(id)}
+    Frontpageconfig{recentVideos1(id)} to Urllink{recentVideos1(id)}
+    Frontpageconfig{recentVideos2(id)} to Urllink{recentVideos2(id)}
+    Frontpageconfig{recentVideos3(id)} to Urllink{recentVideos3(id)}
+    Frontpageconfig{recentVideos4(id)} to Urllink{recentVideos4(id)}
+    Frontpageconfig{recentVideos5(id)} to Urllink{recentVideos5(id)}
+    Frontpageconfig{recentVideos6(id)} to Urllink{recentVideos6(id)}
+}
+
+relationship ManyToOne {
+    Party{user(id) required} to User
+    Notification{user(id) required} to User
+    Proposal{party(id) required} to Party
+    Proposal{post(id) required} to Post
+    Vote{user(id) required} to User
+    Vote{proposal(id) required} to Proposal{vote(id)}
+}
+
+relationship OneToMany {
+    Party to Blog{party required}
+    Blog to Post{blog(title) required}
+    Post{comment} to Comment{post(headline) required}
+    Party to Comment{party required}
+    Party{message} to Message{party required}
+    Party{followed(id)} to Follow{followed(id)}
+    Party{following(id)} to Follow{following(id)}
+    Party{blockinguser(id)} to Blockeduser{blockinguser(id)}
+    Party{blockeduser(id)} to Blockeduser{blockeduser(id)}
+    Album{photo} to Photo{album}
+    Country{state(stateName)} to State{country(countryName)}
+    State{city(cityName)} to City{state(stateName)}
+    City{address} to Address{city(cityName)}
+}
+
+relationship ManyToMany {
+	Tag{post(headline)} to Post{tag(tagName)}
+    Topic{post(headline)} to Post{topic(topicName)}
+    Interest{party} to Party{interest(interestName)}
+    Activity{party} to Party{activity(activityName)}
+    Celeb{party} to Party{celeb(celebName)}
+}
+
+// Set pagination options
+//paginate all with infinite-scroll
+paginate all with pagination
+
+// DTO for all
+// dto * with mapstruct
+
+// Set service options to all except few
+// service all with serviceImpl
