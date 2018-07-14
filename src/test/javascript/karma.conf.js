@@ -45,6 +45,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/ng-file-upload/ng-file-upload.js',
             'src/main/webapp/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
             'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
+            'src/main/webapp/bower_components/ngQuill/src/ng-quill.js',
             // endbower
             'src/main/webapp/app/app.module.js',
             'src/main/webapp/app/app.state.js',
