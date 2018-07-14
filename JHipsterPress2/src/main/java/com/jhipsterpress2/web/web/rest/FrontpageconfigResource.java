@@ -1,13 +1,14 @@
 package com.jhipsterpress2.web.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.jhipsterpress2.web.service.FrontpageconfigQueryService;
 import com.jhipsterpress2.web.service.FrontpageconfigService;
+import com.jhipsterpress2.web.service.dto.CustomFrontpageconfigDTO;
+import com.jhipsterpress2.web.service.dto.FrontpageconfigCriteria;
+import com.jhipsterpress2.web.service.dto.FrontpageconfigDTO;
 import com.jhipsterpress2.web.web.rest.errors.BadRequestAlertException;
 import com.jhipsterpress2.web.web.rest.util.HeaderUtil;
 import com.jhipsterpress2.web.web.rest.util.PaginationUtil;
-import com.jhipsterpress2.web.service.dto.FrontpageconfigDTO;
-import com.jhipsterpress2.web.service.dto.FrontpageconfigCriteria;
-import com.jhipsterpress2.web.service.FrontpageconfigQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -114,6 +114,20 @@ public class FrontpageconfigResource {
     public ResponseEntity<FrontpageconfigDTO> getFrontpageconfig(@PathVariable Long id) {
         log.debug("REST request to get Frontpageconfig : {}", id);
         Optional<FrontpageconfigDTO> frontpageconfigDTO = frontpageconfigService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(frontpageconfigDTO);
+    }
+
+    /**
+     * GET  /frontpageconfigs/:id/posts : get the "id" frontpageconfig, including posts
+     *
+     * @param id the id of the frontpageconfigDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the frontpageconfigDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/frontpageconfigs/{id}/posts")
+    @Timed
+    public ResponseEntity<CustomFrontpageconfigDTO> getFrontpageconfigIncludingPosts(@PathVariable Long id) {
+        log.debug("REST request to get Frontpageconfig : {}", id);
+        Optional<CustomFrontpageconfigDTO> frontpageconfigDTO = frontpageconfigService.findOneIncludingPosts(id);
         return ResponseUtil.wrapOrNotFound(frontpageconfigDTO);
     }
 
