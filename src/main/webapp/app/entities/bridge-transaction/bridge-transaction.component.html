@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="finaltestApp.bridgeTransaction.home.title">Bridge Transactions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bridge-transaction" [routerLink]="['/bridge-transaction/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="finaltestApp.bridgeTransaction.home.createLabel">
+            Create new Bridge Transaction
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="bridgeTransactions">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.idBridge">Id Bridge</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.description">Description</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.rawDescription">Raw Description</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.date">Date</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.updatedAt">Updated At</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.isDeleted">Is Deleted</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.bridgeCategory">Bridge Category</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeTransaction.bridgeAccountBank">Bridge Account Bank</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bridgeTransaction of bridgeTransactions ;trackBy: trackId">
+                <td><a [routerLink]="['/bridge-transaction', bridgeTransaction.id, 'view' ]">{{bridgeTransaction.id}}</a></td>
+                <td>{{bridgeTransaction.idBridge}}</td>
+                <td>{{bridgeTransaction.description}}</td>
+                <td>{{bridgeTransaction.rawDescription}}</td>
+                <td>{{bridgeTransaction.date | date:'mediumDate'}}</td>
+                <td>{{bridgeTransaction.updatedAt | date:'medium'}}</td>
+                <td>{{bridgeTransaction.isDeleted}}</td>
+                <td>
+                    <div *ngIf="bridgeTransaction.bridgeCategory">
+                        <a [routerLink]="['../bridge-category', bridgeTransaction.bridgeCategory?.id, 'view' ]" >{{bridgeTransaction.bridgeCategory?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="bridgeTransaction.bridgeAccountBank">
+                        <a [routerLink]="['../bridge-account-bank', bridgeTransaction.bridgeAccountBank?.id, 'view' ]" >{{bridgeTransaction.bridgeAccountBank?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/bridge-transaction', bridgeTransaction.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/bridge-transaction', bridgeTransaction.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bridge-transaction/'+ bridgeTransaction.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

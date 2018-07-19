@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-bridge-transaction-heading" jhiTranslate="finaltestApp.bridgeTransaction.home.createOrEditLabel">Create or edit a Bridge Transaction</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!bridgeTransaction.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="bridgeTransaction.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.idBridge" for="field_idBridge">Id Bridge</label>
+                    <input type="number" class="form-control" name="idBridge" id="field_idBridge"
+                        [(ngModel)]="bridgeTransaction.idBridge" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="bridgeTransaction.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.rawDescription" for="field_rawDescription">Raw Description</label>
+                    <input type="text" class="form-control" name="rawDescription" id="field_rawDescription"
+                        [(ngModel)]="bridgeTransaction.rawDescription" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.date" for="field_date">Date</label>
+                    <div class="input-group">
+                        <input id="field_date" type="text" class="form-control" name="date" ngbDatepicker  #dateDp="ngbDatepicker" [(ngModel)]="bridgeTransaction.date"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.updatedAt" for="field_updatedAt">Updated At</label>
+                    <div class="d-flex">
+                        <input id="field_updatedAt" type="datetime-local" class="form-control" name="updatedAt" [(ngModel)]="updatedAt"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.isDeleted" for="field_isDeleted">Is Deleted</label>
+                    <input type="checkbox" class="form-control" name="isDeleted" id="field_isDeleted"
+                        [(ngModel)]="bridgeTransaction.isDeleted" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.bridgeCategory" for="field_bridgeCategory">Bridge Category</label>
+                    <select class="form-control" id="field_bridgeCategory" name="bridgeCategory" [(ngModel)]="bridgeTransaction.bridgeCategory" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="bridgeCategoryOption.id === bridgeTransaction.bridgeCategory?.id ? bridgeTransaction.bridgeCategory : bridgeCategoryOption" *ngFor="let bridgeCategoryOption of bridgecategories; trackBy: trackBridgeCategoryById">{{bridgeCategoryOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeTransaction.bridgeAccountBank" for="field_bridgeAccountBank">Bridge Account Bank</label>
+                    <select class="form-control" id="field_bridgeAccountBank" name="bridgeAccountBank" [(ngModel)]="bridgeTransaction.bridgeAccountBank" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="bridgeAccountBankOption.id === bridgeTransaction.bridgeAccountBank?.id ? bridgeTransaction.bridgeAccountBank : bridgeAccountBankOption" *ngFor="let bridgeAccountBankOption of bridgeaccountbanks; trackBy: trackBridgeAccountBankById">{{bridgeAccountBankOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

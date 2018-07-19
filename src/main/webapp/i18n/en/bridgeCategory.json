@@ -1,0 +1,24 @@
+
+{
+    "finaltestApp": {
+        "bridgeCategory" : {
+            "home": {
+                "title": "Bridge Categories",
+                "createLabel": "Create a new Bridge Category",
+                "createOrEditLabel": "Create or edit a Bridge Category"
+            },
+            "created": "A new Bridge Category is created with identifier {{ param }}",
+            "updated": "A Bridge Category is updated with identifier {{ param }}",
+            "deleted": "A Bridge Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bridge Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Bridge Category"
+            },
+            "idBridge": "Id Bridge",
+            "name": "Name",
+            "bridgeCategoryParent": "Bridge Category Parent"
+        }
+    }
+}

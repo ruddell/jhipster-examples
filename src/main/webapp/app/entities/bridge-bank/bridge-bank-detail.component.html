@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bridgeBank">
+            <h2><span jhiTranslate="finaltestApp.bridgeBank.detail.title">Bridge Bank</span> {{bridgeBank.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="finaltestApp.bridgeBank.idBridge">Id Bridge</span></dt>
+                <dd>
+                    <span>{{bridgeBank.idBridge}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeBank.name">Name</span></dt>
+                <dd>
+                    <span>{{bridgeBank.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeBank.countryCode">Country Code</span></dt>
+                <dd>
+                    <span>{{bridgeBank.countryCode}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bridge-bank', bridgeBank.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

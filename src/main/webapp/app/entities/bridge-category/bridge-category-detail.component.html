@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bridgeCategory">
+            <h2><span jhiTranslate="finaltestApp.bridgeCategory.detail.title">Bridge Category</span> {{bridgeCategory.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="finaltestApp.bridgeCategory.idBridge">Id Bridge</span></dt>
+                <dd>
+                    <span>{{bridgeCategory.idBridge}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeCategory.name">Name</span></dt>
+                <dd>
+                    <span>{{bridgeCategory.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeCategory.bridgeCategoryParent">Bridge Category Parent</span></dt>
+                <dd>
+                    <div *ngIf="bridgeCategory.bridgeCategoryParent">
+                        <a [routerLink]="['/bridge-category', bridgeCategory.bridgeCategoryParent?.id, 'view']">{{bridgeCategory.bridgeCategoryParent?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bridge-category', bridgeCategory.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

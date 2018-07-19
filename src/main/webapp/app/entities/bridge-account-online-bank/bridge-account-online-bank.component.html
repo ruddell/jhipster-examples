@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.home.title">Bridge Account Online Banks</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bridge-account-online-bank" [routerLink]="['/bridge-account-online-bank/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="finaltestApp.bridgeAccountOnlineBank.home.createLabel">
+            Create new Bridge Account Online Bank
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="bridgeAccountOnlineBanks">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.idBridge">Id Bridge</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.status">Status</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.bridgeBank">Bridge Bank</span></th>
+            <th><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.bridgeUser">Bridge User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bridgeAccountOnlineBank of bridgeAccountOnlineBanks ;trackBy: trackId">
+                <td><a [routerLink]="['/bridge-account-online-bank', bridgeAccountOnlineBank.id, 'view' ]">{{bridgeAccountOnlineBank.id}}</a></td>
+                <td>{{bridgeAccountOnlineBank.idBridge}}</td>
+                <td>{{bridgeAccountOnlineBank.status}}</td>
+                <td>
+                    <div *ngIf="bridgeAccountOnlineBank.bridgeBank">
+                        <a [routerLink]="['../bridge-bank', bridgeAccountOnlineBank.bridgeBank?.id, 'view' ]" >{{bridgeAccountOnlineBank.bridgeBank?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="bridgeAccountOnlineBank.bridgeUser">
+                        <a [routerLink]="['../bridge-user', bridgeAccountOnlineBank.bridgeUser?.id, 'view' ]" >{{bridgeAccountOnlineBank.bridgeUser?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/bridge-account-online-bank', bridgeAccountOnlineBank.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/bridge-account-online-bank', bridgeAccountOnlineBank.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bridge-account-online-bank/'+ bridgeAccountOnlineBank.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

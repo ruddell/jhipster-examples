@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bridgeAccountBank">
+            <h2><span jhiTranslate="finaltestApp.bridgeAccountBank.detail.title">Bridge Account Bank</span> {{bridgeAccountBank.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.idBridge">Id Bridge</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.idBridge}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.name">Name</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.type">Type</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.type}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.currencyCode">Currency Code</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.currencyCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.itemStatus">Item Status</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.itemStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.updatedAt">Updated At</span></dt>
+                <dd>
+                    <span>{{bridgeAccountBank.updatedAt}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.bridgeBank">Bridge Bank</span></dt>
+                <dd>
+                    <div *ngIf="bridgeAccountBank.bridgeBank">
+                        <a [routerLink]="['/bridge-bank', bridgeAccountBank.bridgeBank?.id, 'view']">{{bridgeAccountBank.bridgeBank?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountBank.bridgeAccountOnlineBank">Bridge Account Online Bank</span></dt>
+                <dd>
+                    <div *ngIf="bridgeAccountBank.bridgeAccountOnlineBank">
+                        <a [routerLink]="['/bridge-account-online-bank', bridgeAccountBank.bridgeAccountOnlineBank?.id, 'view']">{{bridgeAccountBank.bridgeAccountOnlineBank?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bridge-account-bank', bridgeAccountBank.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

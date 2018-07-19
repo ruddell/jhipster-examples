@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity BridgeAccountOnlineBank.
+    -->
+    <changeSet id="20180719143419-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="bridge_bank_id"
+                                 baseTableName="bridge_account_online_bank"
+                                 constraintName="fk_bridge_account_online_bank_bridge_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bridge_bank"/>
+
+        <addForeignKeyConstraint baseColumnNames="bridge_user_id"
+                                 baseTableName="bridge_account_online_bank"
+                                 constraintName="fk_bridge_account_online_bank_bridge_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bridge_user"/>
+
+    </changeSet>
+</databaseChangeLog>

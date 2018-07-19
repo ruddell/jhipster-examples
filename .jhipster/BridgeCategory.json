@@ -1,0 +1,30 @@
+{
+    "name": "BridgeCategory",
+    "fields": [
+        {
+            "fieldName": "idBridge",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeCategoryParent",
+            "otherEntityName": "bridgeCategory",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180719143422",
+    "entityTableName": "bridge_category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

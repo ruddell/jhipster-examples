@@ -1,0 +1,26 @@
+
+{
+    "finaltestApp": {
+        "bridgeAccountOnlineBank" : {
+            "home": {
+                "title": "Bridge Account Online Banks",
+                "createLabel": "Create a new Bridge Account Online Bank",
+                "createOrEditLabel": "Create or edit a Bridge Account Online Bank"
+            },
+            "created": "A new Bridge Account Online Bank is created with identifier {{ param }}",
+            "updated": "A Bridge Account Online Bank is updated with identifier {{ param }}",
+            "deleted": "A Bridge Account Online Bank is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bridge Account Online Bank {{ id }}?"
+            },
+            "detail": {
+                "title": "Bridge Account Online Bank"
+            },
+            "idBridge": "Id Bridge",
+            "status": "Status",
+            "bridgeAccountsBank": "Bridge Accounts Bank",
+            "bridgeBank": "Bridge Bank",
+            "bridgeUser": "Bridge User"
+        }
+    }
+}

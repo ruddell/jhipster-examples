@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143416_added_entity_BridgeUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143417_added_entity_BridgeBank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143418_added_entity_BridgeAccountBank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143419_added_entity_BridgeAccountOnlineBank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143420_added_entity_AccountBankStat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143421_added_entity_BridgeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143422_added_entity_BridgeCategory.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180719143416_added_entity_constraints_BridgeUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143418_added_entity_constraints_BridgeAccountBank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143419_added_entity_constraints_BridgeAccountOnlineBank.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143420_added_entity_constraints_AccountBankStat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143421_added_entity_constraints_BridgeTransaction.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719143422_added_entity_constraints_BridgeCategory.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

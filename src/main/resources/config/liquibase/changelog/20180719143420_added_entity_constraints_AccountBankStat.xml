@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity AccountBankStat.
+    -->
+    <changeSet id="20180719143420-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="bridge_account_bank_id"
+                                 baseTableName="account_bank_stat"
+                                 constraintName="fk_account_bank_stat_bridge_account_bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bridge_account_bank"/>
+
+    </changeSet>
+</databaseChangeLog>

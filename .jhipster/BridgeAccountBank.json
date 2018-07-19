@@ -1,0 +1,64 @@
+{
+    "name": "BridgeAccountBank",
+    "fields": [
+        {
+            "fieldName": "idBridge",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "currencyCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "itemStatus",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "bridgeAccountBankStats",
+            "otherEntityName": "accountBankStat",
+            "otherEntityRelationshipName": "bridgeAccountBank"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "bridgeTransactions",
+            "otherEntityName": "bridgeTransaction",
+            "otherEntityRelationshipName": "bridgeAccountBank"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeBank",
+            "otherEntityName": "bridgeBank",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeAccountOnlineBank",
+            "otherEntityName": "bridgeAccountOnlineBank",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180719143418",
+    "entityTableName": "bridge_account_bank",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
