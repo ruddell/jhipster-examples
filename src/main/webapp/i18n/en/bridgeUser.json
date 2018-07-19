@@ -1,0 +1,26 @@
+
+{
+    "finaltestApp": {
+        "bridgeUser" : {
+            "home": {
+                "title": "Bridge Users",
+                "createLabel": "Create a new Bridge User",
+                "createOrEditLabel": "Create or edit a Bridge User"
+            },
+            "created": "A new Bridge User is created with identifier {{ param }}",
+            "updated": "A Bridge User is updated with identifier {{ param }}",
+            "deleted": "A Bridge User is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bridge User {{ id }}?"
+            },
+            "detail": {
+                "title": "Bridge User"
+            },
+            "uuidBridge": "Uuid Bridge",
+            "email": "Email",
+            "password": "Password",
+            "user": "User",
+            "bridgeAccountsOnlineBank": "Bridge Accounts Online Bank"
+        }
+    }
+}

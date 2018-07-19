@@ -1,0 +1,31 @@
+
+{
+    "finaltestApp": {
+        "bridgeAccountBank" : {
+            "home": {
+                "title": "Bridge Account Banks",
+                "createLabel": "Create a new Bridge Account Bank",
+                "createOrEditLabel": "Create or edit a Bridge Account Bank"
+            },
+            "created": "A new Bridge Account Bank is created with identifier {{ param }}",
+            "updated": "A Bridge Account Bank is updated with identifier {{ param }}",
+            "deleted": "A Bridge Account Bank is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bridge Account Bank {{ id }}?"
+            },
+            "detail": {
+                "title": "Bridge Account Bank"
+            },
+            "idBridge": "Id Bridge",
+            "name": "Name",
+            "type": "Type",
+            "currencyCode": "Currency Code",
+            "itemStatus": "Item Status",
+            "updatedAt": "Updated At",
+            "bridgeAccountBankStats": "Bridge Account Bank Stats",
+            "bridgeTransactions": "Bridge Transactions",
+            "bridgeBank": "Bridge Bank",
+            "bridgeAccountOnlineBank": "Bridge Account Online Bank"
+        }
+    }
+}

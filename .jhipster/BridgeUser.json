@@ -1,0 +1,42 @@
+{
+    "name": "BridgeUser",
+    "fields": [
+        {
+            "fieldName": "uuidBridge",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "password",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "bridgeUser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "bridgeAccountsOnlineBank",
+            "otherEntityName": "bridgeAccountOnlineBank",
+            "otherEntityRelationshipName": "bridgeUser"
+        }
+    ],
+    "changelogDate": "20180719143416",
+    "entityTableName": "bridge_user",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -7,6 +7,13 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
+                "bridgeUser": "Bridge User",
+                "bridgeBank": "Bridge Bank",
+                "bridgeAccountBank": "Bridge Account Bank",
+                "bridgeAccountOnlineBank": "Bridge Account Online Bank",
+                "accountBankStat": "Account Bank Stat",
+                "bridgeTransaction": "Bridge Transaction",
+                "bridgeCategory": "Bridge Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

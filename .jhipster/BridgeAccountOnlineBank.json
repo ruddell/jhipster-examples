@@ -1,0 +1,42 @@
+{
+    "name": "BridgeAccountOnlineBank",
+    "fields": [
+        {
+            "fieldName": "idBridge",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "bridgeAccountsBank",
+            "otherEntityName": "bridgeAccountBank",
+            "otherEntityRelationshipName": "bridgeAccountOnlineBank"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeBank",
+            "otherEntityName": "bridgeBank",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeUser",
+            "otherEntityName": "bridgeUser",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180719143419",
+    "entityTableName": "bridge_account_online_bank",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

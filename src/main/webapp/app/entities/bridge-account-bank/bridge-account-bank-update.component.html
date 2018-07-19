@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-bridge-account-bank-heading" jhiTranslate="finaltestApp.bridgeAccountBank.home.createOrEditLabel">Create or edit a Bridge Account Bank</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!bridgeAccountBank.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="bridgeAccountBank.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.idBridge" for="field_idBridge">Id Bridge</label>
+                    <input type="number" class="form-control" name="idBridge" id="field_idBridge"
+                        [(ngModel)]="bridgeAccountBank.idBridge" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="bridgeAccountBank.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.type" for="field_type">Type</label>
+                    <input type="text" class="form-control" name="type" id="field_type"
+                        [(ngModel)]="bridgeAccountBank.type" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.currencyCode" for="field_currencyCode">Currency Code</label>
+                    <input type="text" class="form-control" name="currencyCode" id="field_currencyCode"
+                        [(ngModel)]="bridgeAccountBank.currencyCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.itemStatus" for="field_itemStatus">Item Status</label>
+                    <input type="number" class="form-control" name="itemStatus" id="field_itemStatus"
+                        [(ngModel)]="bridgeAccountBank.itemStatus" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.updatedAt" for="field_updatedAt">Updated At</label>
+                    <div class="d-flex">
+                        <input id="field_updatedAt" type="datetime-local" class="form-control" name="updatedAt" [(ngModel)]="updatedAt"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.bridgeBank" for="field_bridgeBank">Bridge Bank</label>
+                    <select class="form-control" id="field_bridgeBank" name="bridgeBank" [(ngModel)]="bridgeAccountBank.bridgeBank" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="bridgeBankOption.id === bridgeAccountBank.bridgeBank?.id ? bridgeAccountBank.bridgeBank : bridgeBankOption" *ngFor="let bridgeBankOption of bridgebanks; trackBy: trackBridgeBankById">{{bridgeBankOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="finaltestApp.bridgeAccountBank.bridgeAccountOnlineBank" for="field_bridgeAccountOnlineBank">Bridge Account Online Bank</label>
+                    <select class="form-control" id="field_bridgeAccountOnlineBank" name="bridgeAccountOnlineBank" [(ngModel)]="bridgeAccountBank.bridgeAccountOnlineBank" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="bridgeAccountOnlineBankOption.id === bridgeAccountBank.bridgeAccountOnlineBank?.id ? bridgeAccountBank.bridgeAccountOnlineBank : bridgeAccountOnlineBankOption" *ngFor="let bridgeAccountOnlineBankOption of bridgeaccountonlinebanks; trackBy: trackBridgeAccountOnlineBankById">{{bridgeAccountOnlineBankOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

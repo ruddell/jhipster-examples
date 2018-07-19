@@ -1,0 +1,24 @@
+
+{
+    "finaltestApp": {
+        "accountBankStat" : {
+            "home": {
+                "title": "Account Bank Stats",
+                "createLabel": "Create a new Account Bank Stat",
+                "createOrEditLabel": "Create or edit a Account Bank Stat"
+            },
+            "created": "A new Account Bank Stat is created with identifier {{ param }}",
+            "updated": "A Account Bank Stat is updated with identifier {{ param }}",
+            "deleted": "A Account Bank Stat is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Account Bank Stat {{ id }}?"
+            },
+            "detail": {
+                "title": "Account Bank Stat"
+            },
+            "balance": "Balance",
+            "lastRefresh": "Last Refresh",
+            "bridgeAccountBank": "Bridge Account Bank"
+        }
+    }
+}

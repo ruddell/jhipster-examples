@@ -1,0 +1,24 @@
+
+{
+    "finaltestApp": {
+        "bridgeBank" : {
+            "home": {
+                "title": "Bridge Banks",
+                "createLabel": "Create a new Bridge Bank",
+                "createOrEditLabel": "Create or edit a Bridge Bank"
+            },
+            "created": "A new Bridge Bank is created with identifier {{ param }}",
+            "updated": "A Bridge Bank is updated with identifier {{ param }}",
+            "deleted": "A Bridge Bank is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bridge Bank {{ id }}?"
+            },
+            "detail": {
+                "title": "Bridge Bank"
+            },
+            "idBridge": "Id Bridge",
+            "name": "Name",
+            "countryCode": "Country Code"
+        }
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "name": "BridgeTransaction",
+    "fields": [
+        {
+            "fieldName": "idBridge",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "rawDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "isDeleted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeCategory",
+            "otherEntityName": "bridgeCategory",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeAccountBank",
+            "otherEntityName": "bridgeAccountBank",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180719143421",
+    "entityTableName": "bridge_transaction",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

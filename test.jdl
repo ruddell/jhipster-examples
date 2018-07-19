@@ -1,0 +1,57 @@
+entity BridgeUser (bridge_user) {
+  uuidBridge String,
+  email String,
+  password String
+}
+entity BridgeBank (bridge_bank) {
+  idBridge Long,
+  name String,
+  countryCode String
+}
+entity BridgeAccountBank (bridge_account_bank) {
+  idBridge Long,
+  name String,
+  type String,
+  currencyCode String,
+  itemStatus Long,
+  updatedAt ZonedDateTime
+}
+entity BridgeAccountOnlineBank (bridge_account_online_bank) {
+  idBridge Long,
+  status Long
+}
+entity AccountBankStat (account_bank_stat) {
+  balance Double,
+  lastRefresh ZonedDateTime
+}
+entity BridgeTransaction (bridge_transaction) {
+  idBridge Long,
+  description String,
+  rawDescription String,
+  date LocalDate,
+  updatedAt ZonedDateTime,
+  isDeleted Boolean
+}
+entity BridgeCategory (bridge_category) {
+  idBridge Long,
+  name String
+}
+relationship OneToOne {
+  BridgeUser{user} to User
+}
+relationship OneToMany {
+  BridgeAccountOnlineBank{bridgeAccountsBank} to BridgeAccountBank{bridgeAccountOnlineBank},
+  BridgeUser{bridgeAccountsOnlineBank} to BridgeAccountOnlineBank{bridgeUser},
+  BridgeAccountBank{bridgeAccountBankStats} to AccountBankStat{bridgeAccountBank},
+  BridgeAccountBank{bridgeTransactions} to BridgeTransaction{bridgeAccountBank}
+}
+relationship ManyToOne {
+  BridgeAccountBank{bridgeBank} to BridgeBank,
+  BridgeAccountOnlineBank{bridgeBank} to BridgeBank,
+  BridgeTransaction{bridgeCategory} to BridgeCategory,
+  BridgeCategory{bridgeCategoryParent} to BridgeCategory
+}
+
+service BridgeUser, BridgeBank, BridgeAccountBank, BridgeAccountOnlineBank, AccountBankStat, BridgeTransaction, BridgeCategory with serviceClass
+
+

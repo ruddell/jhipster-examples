@@ -38,6 +38,17 @@ public class CacheConfiguration {
             cm.createCache(com.mycompany.myapp.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeUser.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeUser.class.getName() + ".bridgeAccountsOnlineBanks", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeBank.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeAccountBank.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeAccountBank.class.getName() + ".bridgeAccountBankStats", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeAccountBank.class.getName() + ".bridgeTransactions", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeAccountOnlineBank.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeAccountOnlineBank.class.getName() + ".bridgeAccountsBanks", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.AccountBankStat.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeTransaction.class.getName(), jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.BridgeCategory.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

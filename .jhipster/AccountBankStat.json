@@ -1,0 +1,30 @@
+{
+    "name": "AccountBankStat",
+    "fields": [
+        {
+            "fieldName": "balance",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "lastRefresh",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "bridgeAccountBank",
+            "otherEntityName": "bridgeAccountBank",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180719143420",
+    "entityTableName": "account_bank_stat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

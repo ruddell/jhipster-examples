@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bridgeAccountOnlineBank">
+            <h2><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.detail.title">Bridge Account Online Bank</span> {{bridgeAccountOnlineBank.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.idBridge">Id Bridge</span></dt>
+                <dd>
+                    <span>{{bridgeAccountOnlineBank.idBridge}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.status">Status</span></dt>
+                <dd>
+                    <span>{{bridgeAccountOnlineBank.status}}</span>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.bridgeBank">Bridge Bank</span></dt>
+                <dd>
+                    <div *ngIf="bridgeAccountOnlineBank.bridgeBank">
+                        <a [routerLink]="['/bridge-bank', bridgeAccountOnlineBank.bridgeBank?.id, 'view']">{{bridgeAccountOnlineBank.bridgeBank?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="finaltestApp.bridgeAccountOnlineBank.bridgeUser">Bridge User</span></dt>
+                <dd>
+                    <div *ngIf="bridgeAccountOnlineBank.bridgeUser">
+                        <a [routerLink]="['/bridge-user', bridgeAccountOnlineBank.bridgeUser?.id, 'view']">{{bridgeAccountOnlineBank.bridgeUser?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bridge-account-online-bank', bridgeAccountOnlineBank.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
