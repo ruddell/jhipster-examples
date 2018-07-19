@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BridgeCategory } from 'app/shared/model/bridge-category.model';
 import { BridgeCategoryService } from './bridge-category.service';
 import { BridgeCategoryComponent } from './bridge-category.component';
@@ -18,9 +19,9 @@ export class BridgeCategoryResolve implements Resolve<IBridgeCategory> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).map((bridgeCategory: HttpResponse<BridgeCategory>) => bridgeCategory.body);
+            return this.service.find(id).pipe(map((bridgeCategory: HttpResponse<BridgeCategory>) => bridgeCategory.body));
         }
-        return Observable.of(new BridgeCategory());
+        return of(new BridgeCategory());
     }
 }
 

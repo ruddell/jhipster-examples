@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BridgeAccountOnlineBank } from 'app/shared/model/bridge-account-online-bank.model';
 import { BridgeAccountOnlineBankService } from './bridge-account-online-bank.service';
 import { BridgeAccountOnlineBankComponent } from './bridge-account-online-bank.component';
@@ -20,9 +21,9 @@ export class BridgeAccountOnlineBankResolve implements Resolve<IBridgeAccountOnl
         if (id) {
             return this.service
                 .find(id)
-                .map((bridgeAccountOnlineBank: HttpResponse<BridgeAccountOnlineBank>) => bridgeAccountOnlineBank.body);
+                .pipe(map((bridgeAccountOnlineBank: HttpResponse<BridgeAccountOnlineBank>) => bridgeAccountOnlineBank.body));
         }
-        return Observable.of(new BridgeAccountOnlineBank());
+        return of(new BridgeAccountOnlineBank());
     }
 }
 

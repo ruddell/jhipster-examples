@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BridgeBank } from 'app/shared/model/bridge-bank.model';
 import { BridgeBankService } from './bridge-bank.service';
 import { BridgeBankComponent } from './bridge-bank.component';
@@ -18,9 +19,9 @@ export class BridgeBankResolve implements Resolve<IBridgeBank> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).map((bridgeBank: HttpResponse<BridgeBank>) => bridgeBank.body);
+            return this.service.find(id).pipe(map((bridgeBank: HttpResponse<BridgeBank>) => bridgeBank.body));
         }
-        return Observable.of(new BridgeBank());
+        return of(new BridgeBank());
     }
 }
 

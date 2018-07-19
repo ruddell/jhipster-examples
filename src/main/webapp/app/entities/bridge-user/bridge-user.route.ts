@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BridgeUser } from 'app/shared/model/bridge-user.model';
 import { BridgeUserService } from './bridge-user.service';
 import { BridgeUserComponent } from './bridge-user.component';
@@ -18,9 +19,9 @@ export class BridgeUserResolve implements Resolve<IBridgeUser> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).map((bridgeUser: HttpResponse<BridgeUser>) => bridgeUser.body);
+            return this.service.find(id).pipe(map((bridgeUser: HttpResponse<BridgeUser>) => bridgeUser.body));
         }
-        return Observable.of(new BridgeUser());
+        return of(new BridgeUser());
     }
 }
 
