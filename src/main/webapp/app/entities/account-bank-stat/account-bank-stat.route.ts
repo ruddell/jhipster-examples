@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AccountBankStat } from 'app/shared/model/account-bank-stat.model';
 import { AccountBankStatService } from './account-bank-stat.service';
 import { AccountBankStatComponent } from './account-bank-stat.component';
@@ -18,9 +19,9 @@ export class AccountBankStatResolve implements Resolve<IAccountBankStat> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).map((accountBankStat: HttpResponse<AccountBankStat>) => accountBankStat.body);
+            return this.service.find(id).pipe(map((accountBankStat: HttpResponse<AccountBankStat>) => accountBankStat.body));
         }
-        return Observable.of(new AccountBankStat());
+        return of(new AccountBankStat());
     }
 }
 

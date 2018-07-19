@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BridgeTransaction } from 'app/shared/model/bridge-transaction.model';
 import { BridgeTransactionService } from './bridge-transaction.service';
 import { BridgeTransactionComponent } from './bridge-transaction.component';
@@ -18,9 +19,9 @@ export class BridgeTransactionResolve implements Resolve<IBridgeTransaction> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).map((bridgeTransaction: HttpResponse<BridgeTransaction>) => bridgeTransaction.body);
+            return this.service.find(id).pipe(map((bridgeTransaction: HttpResponse<BridgeTransaction>) => bridgeTransaction.body));
         }
-        return Observable.of(new BridgeTransaction());
+        return of(new BridgeTransaction());
     }
 }
 
