@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="post">
+            <h2><span>Post</span> {{post.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Creation Date</span></dt>
+                <dd>
+                    <span>{{post.creationDate}}</span>
+                </dd>
+                <dt><span>Headline</span></dt>
+                <dd>
+                    <span>{{post.headline}}</span>
+                </dd>
+                <dt><span>Bodytext</span></dt>
+                <dd>
+                    <span>{{post.bodytext}}</span>
+                </dd>
+                <dt><span>Image</span></dt>
+                <dd>
+                    <div *ngIf="post.image">
+                        <a (click)="openFile(post.imageContentType, post.image)">
+                            <img [src]="'data:' + post.imageContentType + ';base64,' + post.image" style="max-width: 100%;" alt="post image"/>
+                        </a>
+                        {{post.imageContentType}}, {{byteSize(post.image)}}
+                    </div>
+                </dd>
+                <dt><span>Blog</span></dt>
+                <dd>
+                    <div *ngIf="post.blogId">
+                        <a [routerLink]="['/blog', post.blogId, 'view']">{{post.blogId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/post', post.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

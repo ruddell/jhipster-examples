@@ -1,0 +1,37 @@
+
+
+entity Blog {
+    creationDate Instant required
+    title String minlength(2) maxlength(100) required
+}
+  
+entity Post {
+    creationDate Instant required
+    headline String minlength(2) maxlength(100) required
+    bodytext String minlength(2) maxlength(1000) required
+    image ImageBlob
+}
+
+entity Comment {
+    creationDate Instant required
+    commentText String minlength(2) maxlength(1000) required
+}
+
+
+// RELATIONSHIPS:
+relationship OneToMany {
+    Blog to Post{blog required}
+    Post{comment} to Comment{post(headline) required}
+}
+
+// Set pagination options
+paginate all with pagination
+
+// DTOs for all
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass
+
+// Filtering
+filter *

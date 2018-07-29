@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-post-heading">Create or edit a Post</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!post.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="post.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_creationDate">Creation Date</label>
+                    <div class="d-flex">
+                        <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="creationDate"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.creationDate?.dirty && editForm.controls.creationDate?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.creationDate?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.creationDate?.errors?.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_headline">Headline</label>
+                    <input type="text" class="form-control" name="headline" id="field_headline"
+                        [(ngModel)]="post.headline" required minlength="2" maxlength="100"/>
+                    <div [hidden]="!(editForm.controls.headline?.dirty && editForm.controls.headline?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headline?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headline?.errors?.minlength">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.headline?.errors?.maxlength">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bodytext">Bodytext</label>
+                    <input type="text" class="form-control" name="bodytext" id="field_bodytext"
+                        [(ngModel)]="post.bodytext" required minlength="2" maxlength="1000"/>
+                    <div [hidden]="!(editForm.controls.bodytext?.dirty && editForm.controls.bodytext?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bodytext?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bodytext?.errors?.minlength">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.bodytext?.errors?.maxlength">
+                        This field cannot be longer than 1000 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + post.imageContentType + ';base64,' + post.image" style="max-height: 100px;" *ngIf="post.image" alt="post image"/>
+                        <div *ngIf="post.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{post.imageContentType}}, {{byteSize(post.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, post, 'image', true)" accept="image/*"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="post.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="post.imageContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_blog">Blog</label>
+                    <select class="form-control" id="field_blog" name="blog" [(ngModel)]="post.blogId"  required>
+                        <option *ngIf="!editForm.value.blog" [ngValue]="null" selected></option>
+                        <option [ngValue]="blogOption.id" *ngFor="let blogOption of blogs; trackBy: trackBlogById">{{blogOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.blog?.dirty && editForm.controls.blog?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.blog?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
