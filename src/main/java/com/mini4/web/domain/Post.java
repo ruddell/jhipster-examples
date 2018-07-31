@@ -50,7 +50,7 @@ public class Post implements Serializable {
     private String imageContentType;
 
     @OneToMany(mappedBy = "post")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Comment> comments = new HashSet<>();
 
     @ManyToOne(optional = false)

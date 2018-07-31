@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Post and its DTO PostDTO.
  */
-@Mapper(componentModel = "spring", uses = {BlogMapper.class})
+@Mapper(componentModel = "spring", uses = {BlogMapper.class, CommentMapper.class})
 public interface PostMapper extends EntityMapper<PostDTO, Post> {
 
     @Mapping(source = "blog.id", target = "blogId")

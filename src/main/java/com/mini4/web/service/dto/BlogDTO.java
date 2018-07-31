@@ -4,6 +4,7 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the Blog entity.
@@ -18,6 +19,8 @@ public class BlogDTO implements Serializable {
     @NotNull
     @Size(min = 2, max = 100)
     private String title;
+
+    private Set<PostDTO> posts;
 
     public Long getId() {
         return id;
@@ -41,6 +44,14 @@ public class BlogDTO implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Set<PostDTO> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<PostDTO> posts) {
+        this.posts = posts;
     }
 
     @Override

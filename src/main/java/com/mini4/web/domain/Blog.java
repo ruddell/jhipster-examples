@@ -37,7 +37,7 @@ public class Blog implements Serializable {
     private String title;
 
     @OneToMany(mappedBy = "blog")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<Post> posts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

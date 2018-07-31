@@ -4,6 +4,7 @@ import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Lob;
 
 /**
@@ -23,6 +24,8 @@ public class PostDTO implements Serializable {
     @NotNull
     @Size(min = 2, max = 1000)
     private String bodytext;
+
+    private Set<CommentDTO> comments;
 
     @Lob
     private byte[] image;
@@ -84,6 +87,14 @@ public class PostDTO implements Serializable {
 
     public void setBlogId(Long blogId) {
         this.blogId = blogId;
+    }
+
+    public Set<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentDTO> comments) {
+        this.comments = comments;
     }
 
     @Override
