@@ -60,16 +60,16 @@ public class UserResource {
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
 
-    private final UserRepository userRepository;
-
     private final UserService userService;
+
+    private final UserRepository userRepository;
 
     private final MailService mailService;
 
-    public UserResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
 
-        this.userRepository = userRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
         this.mailService = mailService;
     }
 
@@ -142,6 +142,7 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
