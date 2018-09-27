@@ -144,6 +144,25 @@ public class FooResourceIntTest {
 
     @Test
     @Transactional
+    public void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = fooRepository.findAll().size();
+        // set the field null
+        foo.setName(null);
+
+        // Create the Foo, which fails.
+        FooDTO fooDTO = fooMapper.toDto(foo);
+
+        restFooMockMvc.perform(post("/api/foos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(fooDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Foo> fooList = fooRepository.findAll();
+        assertThat(fooList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllFoos() throws Exception {
         // Initialize the database
         fooRepository.saveAndFlush(foo);

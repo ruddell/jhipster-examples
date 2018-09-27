@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ public class FooDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private String name;
 
     public Long getId() {
