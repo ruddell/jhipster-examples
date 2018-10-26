@@ -1,0 +1,12 @@
+entity Foo {
+  fooName String
+}
+
+entity Bar {
+   name String
+}
+
+relationship OneToMany {
+  Bar to Foo
+}
+
