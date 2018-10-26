@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="ruddell (generated)" id="1540513342665-1">
+        <addColumn tableName="bar">
+            <column name="foo_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="ruddell (generated)" id="1540513342665-2">
+        <addForeignKeyConstraint baseColumnNames="foo_id" baseTableName="bar" constraintName="FKdvoqij212wwl2bf14kwo55h55" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="foo"/>
+    </changeSet>
+    <changeSet author="ruddell (generated)" id="1540513342665-3">
+        <dropForeignKeyConstraint baseTableName="foo" constraintName="fk_foo_bar_id"/>
+    </changeSet>
+    <changeSet author="ruddell (generated)" id="1540513342665-4">
+        <dropColumn columnName="bar_id" tableName="foo"/>
+    </changeSet>
+</databaseChangeLog>
