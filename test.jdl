@@ -7,6 +7,6 @@ entity Bar {
 }
 
 relationship OneToMany {
-  Bar to Foo
+  Foo to Bar
 }
 
