@@ -16,6 +16,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="monoApp.bar.name">Name</span></th>
+            <th><span jhiTranslate="monoApp.bar.foo">Foo</span></th>
             <th></th>
             </tr>
             </thead>
@@ -23,6 +24,11 @@
             <tr *ngFor="let bar of bars ;trackBy: trackId">
                 <td><a [routerLink]="['/bar', bar.id, 'view' ]">{{bar.id}}</a></td>
                 <td>{{bar.name}}</td>
+                <td>
+                    <div *ngIf="bar.foo">
+                        <a [routerLink]="['../foo', bar.foo?.id, 'view' ]" >{{bar.foo?.id}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -15,6 +15,13 @@
                         [(ngModel)]="bar.name" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="monoApp.bar.foo" for="field_foo">Foo</label>
+                    <select class="form-control" id="field_foo" name="foo" [(ngModel)]="bar.foo" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="fooOption.id === bar.foo?.id ? bar.foo : fooOption" *ngFor="let fooOption of foos; trackBy: trackFooById">{{fooOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

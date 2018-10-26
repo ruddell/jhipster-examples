@@ -9,12 +9,6 @@
                 <dd>
                     <span>{{foo.fooName}}</span>
                 </dd>
-                <dt><span jhiTranslate="monoApp.foo.bar">Bar</span></dt>
-                <dd>
-                    <div *ngIf="foo.bar">
-                        <a [routerLink]="['/bar', foo.bar?.id, 'view']">{{foo.bar?.id}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

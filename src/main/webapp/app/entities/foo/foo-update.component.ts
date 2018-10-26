@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
 
 import { IFoo } from 'app/shared/model/foo.model';
 import { FooService } from './foo.service';
-import { IBar } from 'app/shared/model/bar.model';
-import { BarService } from 'app/entities/bar';
 
 @Component({
     selector: 'jhi-foo-update',
@@ -17,26 +14,13 @@ export class FooUpdateComponent implements OnInit {
     foo: IFoo;
     isSaving: boolean;
 
-    bars: IBar[];
-
-    constructor(
-        private jhiAlertService: JhiAlertService,
-        private fooService: FooService,
-        private barService: BarService,
-        private activatedRoute: ActivatedRoute
-    ) {}
+    constructor(private fooService: FooService, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ foo }) => {
             this.foo = foo;
         });
-        this.barService.query().subscribe(
-            (res: HttpResponse<IBar[]>) => {
-                this.bars = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     previousState() {
@@ -63,13 +47,5 @@ export class FooUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackBarById(index: number, item: IBar) {
-        return item.id;
     }
 }

@@ -8,10 +8,10 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "relationshipName": "foo",
             "otherEntityName": "foo",
-            "otherEntityRelationshipName": "bar"
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20181026000656",

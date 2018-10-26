@@ -1,12 +1,14 @@
 package com.mycompany.myapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -26,10 +28,9 @@ public class Foo implements Serializable {
     @Column(name = "foo_name")
     private String fooName;
 
-    @ManyToOne
-    @JsonIgnoreProperties("foos")
-    private Bar bar;
-
+    @OneToMany(mappedBy = "foo")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Bar> bars = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -52,17 +53,29 @@ public class Foo implements Serializable {
         this.fooName = fooName;
     }
 
-    public Bar getBar() {
-        return bar;
+    public Set<Bar> getBars() {
+        return bars;
     }
 
-    public Foo bar(Bar bar) {
-        this.bar = bar;
+    public Foo bars(Set<Bar> bars) {
+        this.bars = bars;
         return this;
     }
 
-    public void setBar(Bar bar) {
-        this.bar = bar;
+    public Foo addBar(Bar bar) {
+        this.bars.add(bar);
+        bar.setFoo(this);
+        return this;
+    }
+
+    public Foo removeBar(Bar bar) {
+        this.bars.remove(bar);
+        bar.setFoo(null);
+        return this;
+    }
+
+    public void setBars(Set<Bar> bars) {
+        this.bars = bars;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
