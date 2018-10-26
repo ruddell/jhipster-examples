@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="foo">
+            <h2><span jhiTranslate="monoApp.foo.detail.title">Foo</span> {{foo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="monoApp.foo.fooName">Foo Name</span></dt>
+                <dd>
+                    <span>{{foo.fooName}}</span>
+                </dd>
+                <dt><span jhiTranslate="monoApp.foo.bar">Bar</span></dt>
+                <dd>
+                    <div *ngIf="foo.bar">
+                        <a [routerLink]="['/bar', foo.bar?.id, 'view']">{{foo.bar?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/foo', foo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+{
+    "name": "Bar",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "foo",
+            "otherEntityName": "foo",
+            "otherEntityRelationshipName": "bar"
+        }
+    ],
+    "changelogDate": "20181026000656",
+    "entityTableName": "bar",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
