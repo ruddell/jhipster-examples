@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "blogPost": {
+            "home": {
+                "title": "Blog Posts",
+                "createLabel": "Create a new Blog Post",
+                "createOrEditLabel": "Create or edit a Blog Post"
+            },
+            "created": "A new Blog Post is created with identifier {{ param }}",
+            "updated": "A Blog Post is updated with identifier {{ param }}",
+            "deleted": "A Blog Post is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Blog Post {{ id }}?"
+            },
+            "detail": {
+                "title": "Blog Post"
+            },
+            "name": "Name",
+            "user": "User"
+        }
+    }
+}
