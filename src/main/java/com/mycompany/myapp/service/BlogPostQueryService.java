@@ -96,6 +96,10 @@ public class BlogPostQueryService extends QueryService<BlogPost> {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
                     root -> root.join(BlogPost_.user, JoinType.LEFT).get(User_.id)));
             }
+            if (criteria.getUserLogin() != null) {
+                specification = specification.and(buildSpecification(criteria.getUserLogin(),
+                    root -> root.join(BlogPost_.user, JoinType.LEFT).get(User_.login)));
+            }
         }
         return specification;
     }

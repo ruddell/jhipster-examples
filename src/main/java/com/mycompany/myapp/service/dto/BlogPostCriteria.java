@@ -28,6 +28,8 @@ public class BlogPostCriteria implements Serializable {
 
     private LongFilter userId;
 
+    private StringFilter userLogin;
+
     public BlogPostCriteria() {
     }
 
@@ -55,6 +57,13 @@ public class BlogPostCriteria implements Serializable {
         this.userId = userId;
     }
 
+    public StringFilter getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(StringFilter userLogin) {
+        this.userLogin = userLogin;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -68,7 +77,8 @@ public class BlogPostCriteria implements Serializable {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(userId, that.userId);
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(userLogin, that.userLogin);
     }
 
     @Override
@@ -76,7 +86,8 @@ public class BlogPostCriteria implements Serializable {
         return Objects.hash(
         id,
         name,
-        userId
+        userId,
+        userLogin
         );
     }
 
@@ -86,6 +97,7 @@ public class BlogPostCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
+                (userLogin != null ? "userId=" + userLogin + ", " : "") +
             "}";
     }
 

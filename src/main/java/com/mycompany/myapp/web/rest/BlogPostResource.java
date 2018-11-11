@@ -8,6 +8,7 @@ import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import com.mycompany.myapp.service.dto.BlogPostDTO;
 import com.mycompany.myapp.service.dto.BlogPostCriteria;
 import com.mycompany.myapp.service.BlogPostQueryService;
+import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -142,4 +144,24 @@ public class BlogPostResource {
         blogPostService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET  /blog-posts/user/:login : get all the blogPosts by the "login" user.
+     *
+     * @param login the login for the user whose blogPosts to retrieve
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of blogPosts in body
+     */
+    @GetMapping("/blog-posts/user/{login}")
+    @Timed
+    @PreAuthorize("#login == authentication.name || hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<List<BlogPostDTO>> getAllBlogPosts(@PathVariable String login, Pageable pageable) {
+        log.debug("REST request to get BlogPosts by user login: {}", login);
+        BlogPostCriteria criteria = new BlogPostCriteria();
+        criteria.setUserLogin((StringFilter)new StringFilter().setEquals(login));
+        Page<BlogPostDTO> page = blogPostQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/blog-posts");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
 }
