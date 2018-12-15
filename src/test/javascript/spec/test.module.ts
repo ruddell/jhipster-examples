@@ -6,7 +6,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiLanguageService, JhiDataUtils, JhiDateUtils, JhiEventManager, JhiAlertService, JhiParseLinks } from 'ng-jhipster';
 
 import { MockLanguageService, MockLanguageHelper } from './helpers/mock-language.service';
-import { JhiLanguageHelper, AccountService, LoginModalService } from 'app/core';
+import { JhiLanguageHelper, AccountService, LoginModalService, JhiTrackerService } from 'app/core';
 import { MockAccountService } from './helpers/mock-account.service';
 import { MockActivatedRoute, MockRouter } from './helpers/mock-route.service';
 import { MockActiveModal } from './helpers/mock-active-modal.service';
@@ -25,6 +25,10 @@ import { MockEventManager } from './helpers/mock-event-manager.service';
         {
             provide: JhiLanguageHelper,
             useClass: MockLanguageHelper
+        },
+        {
+            provide: JhiTrackerService,
+            useValue: null
         },
         {
             provide: JhiEventManager,

@@ -1,10 +1,11 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { SERVER_API_URL } from 'app/app.constants';
-import { AccountService } from 'app/core';
+import { AccountService, JhiTrackerService } from 'app/core';
 import { JhiDateUtils, JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 import { MockLanguageService } from '../../../helpers/mock-language.service';
+import { MockTrackerService } from '../../../helpers/mock-tracker.service';
 
 describe('Service Tests', () => {
     describe('Account Service', () => {
@@ -20,6 +21,10 @@ describe('Service Tests', () => {
                     {
                         provide: JhiLanguageService,
                         useClass: MockLanguageService
+                    },
+                    {
+                        provide: JhiTrackerService,
+                        useClass: MockTrackerService
                     }
                 ]
             });

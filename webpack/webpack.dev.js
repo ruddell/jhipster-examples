@@ -32,6 +32,12 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
             secure: false,
             changeOrigin: options.tls,
             headers: { host: 'localhost:9000' }
+        },{
+            context: [
+                '/websocket'
+            ],
+            target: 'ws://127.0.0.1:8080',
+            ws: true
         }],
         stats: options.stats,
         watchOptions: {
@@ -121,7 +127,8 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
             host: 'localhost',
             port: 9000,
             proxy: {
-                target: 'http://localhost:9060'
+                target: 'http://localhost:9060',
+                ws: true
             },
             socket: {
                 clients: {

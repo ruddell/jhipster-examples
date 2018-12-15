@@ -16,6 +16,8 @@ export * from './logs/logs.component';
 export * from './logs/logs.service';
 export * from './logs/logs.route';
 export * from './logs/log.model';
+export * from './tracker/tracker.component';
+export * from './tracker/tracker.route';
 export * from './metrics/metrics.component';
 export * from './metrics/metrics-modal.component';
 export * from './metrics/metrics.service';
