@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.myapp",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "5.7.1",
+    "applicationType": "monolith",
+    "baseName": "mono",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZWFmNTk0MDE1NGI1NDQ4N2UwZjY5ZGE2Yzc5NjM5NWYyNTdjMGY1MTA4NmZiODFmZTM4ZDgyZmM0NjZiNDY0Y2EzMGQzMDc4N2UwMzE1ZjVkZjFlNDA2ZWQzM2IzNmRlM2RlZGQzYWZiMDRiY2Q4MWJlYzAxNWExOGRlZjI1NmM=",
+    "clientFramework": "angularX",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ]
+  }
+}
