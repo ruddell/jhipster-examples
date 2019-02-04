@@ -20,6 +20,7 @@ export * from './metrics/metrics.component';
 export * from './metrics/metrics.service';
 export * from './metrics/metrics.route';
 export * from './user-management/user-management-update.component';
+export * from './user-management/user-management-promote-dialog.component';
 export * from './user-management/user-management-delete-dialog.component';
 export * from './user-management/user-management-detail.component';
 export * from './user-management/user-management.component';

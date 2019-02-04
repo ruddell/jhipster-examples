@@ -7,7 +7,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AccountService, UserService, User } from 'app/core';
-import { UserMgmtDeleteDialogComponent } from 'app/admin';
+import { UserMgmtDeleteDialogComponent, UserMgmtPromoteDialogComponent } from 'app/admin';
 
 @Component({
     selector: 'jhi-user-mgmt',
@@ -121,6 +121,19 @@ export class UserMgmtComponent implements OnInit, OnDestroy {
 
     deleteUser(user: User) {
         const modalRef = this.modalService.open(UserMgmtDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.user = user;
+        modalRef.result.then(
+            result => {
+                // Left blank intentionally, nothing to do here
+            },
+            reason => {
+                // Left blank intentionally, nothing to do here
+            }
+        );
+    }
+
+    promoteUser(user: User) {
+        const modalRef = this.modalService.open(UserMgmtPromoteDialogComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.user = user;
         modalRef.result.then(
             result => {

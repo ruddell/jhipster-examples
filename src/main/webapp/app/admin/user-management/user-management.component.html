@@ -57,6 +57,11 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
+                        <button type="button" (click)="promoteUser(user)"
+                                class="btn btn-success btn-sm" [disabled]="currentAccount.login === user.login">
+                            <fa-icon [icon]="'user'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="userManagement.promote.action">Promote</span>
+                        </button>
                         <button type="button" (click)="deleteUser(user)"
                                 class="btn btn-danger btn-sm" [disabled]="currentAccount.login === user.login">
                             <fa-icon [icon]="'times'"></fa-icon>

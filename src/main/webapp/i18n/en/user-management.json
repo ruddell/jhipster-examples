@@ -11,6 +11,11 @@
         "delete": {
             "question": "Are you sure you want to delete user {{ login }}?"
         },
+        "promote": {
+            "title": "Promote User",
+            "question": "Are you sure you want to promote user {{ login }}?",
+            "action": "Promote"
+        },
         "detail": {
             "title": "User"
         },
