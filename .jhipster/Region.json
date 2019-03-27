@@ -1,0 +1,19 @@
+{
+    "name": "Region",
+    "fields": [
+        {
+            "fieldName": "regionName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190327172051",
+    "entityTableName": "region",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,43 @@
+{
+    "name": "Job",
+    "fields": [
+        {
+            "fieldName": "jobTitle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "minSalary",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "maxSalary",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "task",
+            "otherEntityRelationshipName": "job",
+            "relationshipName": "task",
+            "otherEntityField": "title",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "job",
+            "relationshipName": "employee",
+            "otherEntityField": "email"
+        }
+    ],
+    "changelogDate": "20190327172057",
+    "entityTableName": "job",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

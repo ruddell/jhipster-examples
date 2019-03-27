@@ -1,0 +1,37 @@
+{
+    "name": "Department",
+    "fields": [
+        {
+            "fieldName": "departmentName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "department",
+            "javadoc": "A relationship",
+            "relationshipName": "employee"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "department",
+            "relationshipName": "location",
+            "otherEntityField": "streetAddress"
+        }
+    ],
+    "changelogDate": "20190327172054",
+    "entityTableName": "department",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

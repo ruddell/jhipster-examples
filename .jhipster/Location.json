@@ -1,0 +1,40 @@
+{
+    "name": "Location",
+    "fields": [
+        {
+            "fieldName": "streetAddress",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postalCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateProvince",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "country",
+            "otherEntityRelationshipName": "location",
+            "relationshipName": "country",
+            "otherEntityField": "countryName"
+        }
+    ],
+    "changelogDate": "20190327172053",
+    "javadoc": "not an ignored comment",
+    "entityTableName": "location",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

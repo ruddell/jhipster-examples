@@ -1,0 +1,27 @@
+{
+    "name": "Country",
+    "fields": [
+        {
+            "fieldName": "countryName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "region",
+            "otherEntityRelationshipName": "country",
+            "relationshipName": "region",
+            "otherEntityField": "regionName"
+        }
+    ],
+    "changelogDate": "20190327172052",
+    "entityTableName": "country",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
