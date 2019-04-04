@@ -14,6 +14,8 @@ import {
     JhiLoginModalComponent,
     Principal,
     HasAnyAuthorityDirective,
+    JhiSocialComponent,
+    SocialService,
 } from './';
 
 @NgModule({
@@ -22,6 +24,7 @@ import {
         SocialSharedCommonModule
     ],
     declarations: [
+        JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective
     ],
@@ -33,12 +36,14 @@ import {
         Principal,
         CSRFService,
         AuthServerProvider,
+        SocialService,
         UserService,
         DatePipe
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [
         SocialSharedCommonModule,
+        JhiSocialComponent,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         DatePipe

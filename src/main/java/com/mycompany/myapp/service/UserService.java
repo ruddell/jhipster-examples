@@ -39,13 +39,16 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final SocialService socialService;
+
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.socialService = socialService;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
     }
@@ -204,6 +207,7 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
+            socialService.deleteUserSocialConnection(user.getLogin());
             userRepository.delete(user);
             cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
             cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(user.getEmail());
