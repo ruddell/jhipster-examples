@@ -1,7 +1,15 @@
 package sn.sonatel.dsi.dif.api.webservice.web.rest.errors;
 
-import sn.sonatel.dsi.dif.api.webservice.web.rest.util.HeaderUtil;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,12 +24,7 @@ import org.zalando.problem.Status;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import sn.sonatel.dsi.dif.api.webservice.web.rest.util.HeaderUtil;
 
 /**
  * Controller advice to translate the server side exceptions to client-friendly json structures.
@@ -29,6 +32,8 @@ import java.util.stream.Collectors;
  */
 @ControllerAdvice
 public class ExceptionTranslator implements ProblemHandling {
+
+    private final Logger log = LoggerFactory.getLogger(ExceptionTranslator.class);
 
     private static final String FIELD_ERRORS_KEY = "fieldErrors";
     private static final String MESSAGE_KEY = "message";
@@ -43,6 +48,8 @@ public class ExceptionTranslator implements ProblemHandling {
         if (entity == null) {
             return entity;
         }
+        log.info("received request {}", entity);
+
         Problem problem = entity.getBody();
         if (!(problem instanceof ConstraintViolationProblem || problem instanceof DefaultProblem)) {
             return entity;
@@ -86,6 +93,28 @@ public class ExceptionTranslator implements ProblemHandling {
             .build();
         return create(ex, problem, request);
     }
+
+    /*@ExceptionHandler
+    public ResponseEntity<Problem> handleHttpClientErrorException(HttpClientErrorException ex, NativeWebRequest request) {
+        log.info("ex {}", ex.getLocalizedMessage());
+        String body = ex.getResponseBodyAsString();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            BadRequestAlertException problem = mapper.readValue(body, BadRequestAlertException.class);
+            return create(ex, problem, request);
+        }
+        catch(Exception e) {
+            log.error("error when trying to transform {} to problem", body, e);
+        }
+        Problem problem = Problem.builder()
+            .withStatus(Status.BAD_REQUEST)
+            .withTitle("Method argument not valid")
+            .with("code", "64")
+            .with(MESSAGE_KEY, ex.getLocalizedMessage())
+            .build();
+        return create(ex, problem, request);
+    }*/
+
 
     @ExceptionHandler
     public ResponseEntity<Problem> handleNoSuchElementException(NoSuchElementException ex, NativeWebRequest request) {
