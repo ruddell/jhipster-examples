@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.ConcurrencyFailureException;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.zalando.problem.DefaultProblem;
 import org.zalando.problem.Problem;
@@ -25,6 +27,7 @@ import org.zalando.problem.spring.web.advice.ProblemHandling;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
 import sn.sonatel.dsi.dif.api.webservice.web.rest.util.HeaderUtil;
+import sn.sonatel.dsi.dif.api.webservice.web.rest.vm.BadRequestVM;
 
 /**
  * Controller advice to translate the server side exceptions to client-friendly json structures.
@@ -94,26 +97,29 @@ public class ExceptionTranslator implements ProblemHandling {
         return create(ex, problem, request);
     }
 
-    /*@ExceptionHandler
+    @ExceptionHandler
     public ResponseEntity<Problem> handleHttpClientErrorException(HttpClientErrorException ex, NativeWebRequest request) {
         log.info("ex {}", ex.getLocalizedMessage());
         String body = ex.getResponseBodyAsString();
         try {
             ObjectMapper mapper = new ObjectMapper();
-            BadRequestAlertException problem = mapper.readValue(body, BadRequestAlertException.class);
+            BadRequestVM badRequestVM = mapper.readValue(body, BadRequestVM.class);
+            Problem problem = Problem.builder()
+                .withStatus(defaultConstraintViolationStatus())
+                .withTitle(badRequestVM.getTitle())
+                .with("entityName", badRequestVM.getEntityName())
+                .with("errorKey", badRequestVM.getErrorKey())
+                .with(MESSAGE_KEY, badRequestVM.getMessage())
+                .with("params", badRequestVM.getParams())
+                .withType(ErrorConstants.DEFAULT_TYPE)
+                .build();
             return create(ex, problem, request);
         }
         catch(Exception e) {
             log.error("error when trying to transform {} to problem", body, e);
+            throw ex;
         }
-        Problem problem = Problem.builder()
-            .withStatus(Status.BAD_REQUEST)
-            .withTitle("Method argument not valid")
-            .with("code", "64")
-            .with(MESSAGE_KEY, ex.getLocalizedMessage())
-            .build();
-        return create(ex, problem, request);
-    }*/
+    }
 
 
     @ExceptionHandler
