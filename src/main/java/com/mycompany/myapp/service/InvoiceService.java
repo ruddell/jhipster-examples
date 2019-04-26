@@ -28,10 +28,12 @@ public class InvoiceService {
     private final InvoiceRepository invoiceRepository;
 
     private final InvoiceMapper invoiceMapper;
+    private final AmazonService amazonService;
 
-    public InvoiceService(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper) {
+    public InvoiceService(InvoiceRepository invoiceRepository, InvoiceMapper invoiceMapper, AmazonService amazonService) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceMapper = invoiceMapper;
+        this.amazonService = amazonService;
     }
 
     /**
@@ -42,6 +44,36 @@ public class InvoiceService {
      */
     public InvoiceDTO save(InvoiceDTO invoiceDTO) {
         log.debug("Request to save Invoice : {}", invoiceDTO);
+
+        byte[] pdf = invoiceDTO.getPdf();
+        invoiceDTO.setPdf(null);
+        if (pdf != null) {
+            String fileName = invoiceDTO.getCompanyId() + "/" + UUID.randomUUID() + ".pdf";
+            String url = amazonService.uploadFile(pdf, fileName);
+            invoiceDTO.setAttachmentUrl(url);
+        }
+        
+//        Invoice invoice = invoiceFaMapper.toEntity(invoiceDTO);
+//        invoice = invoiceFaRepository.save(invoice);
+
+//        documentChangeService.save(STATUS, "", "CREATED", invoice.getId());
+//        if (invoice.getStatus().equals(Status.OPEN)) {
+//            documentChangeService.save(STATUS, "", "CONFIRMED", invoice.getId());
+//        }
+//        invoice.getLines().clear();
+//        for (InvoiceLineDTO line : invoiceDTO.getLines()) {
+//            line.setInvoiceId(invoice.getId());
+//            line = invoiceLineService.create(line);
+//            invoice.getLines().add(invoiceLineMapper.toEntity(line));
+//        }
+
+// I tried this also, but doesn't work
+//        invoice.setPdf(null);
+//        invoiceFaRepository.save(invoice);
+//        return invoiceFaMapper.toDto(invoice);
+
+
+
         Invoice invoice = invoiceMapper.toEntity(invoiceDTO);
         invoice = invoiceRepository.save(invoice);
         return invoiceMapper.toDto(invoice);
