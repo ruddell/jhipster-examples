@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="invoice">
+            <h2><span jhiTranslate="monoApp.invoice.detail.title">Invoice</span> {{invoice.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="monoApp.invoice.attachmentUrl">Attachment Url</span></dt>
+                <dd>
+                    <span>{{invoice.attachmentUrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="monoApp.invoice.pdf">Pdf</span></dt>
+                <dd>
+                    <div *ngIf="invoice.pdf">
+                        <a (click)="openFile(invoice.pdfContentType, invoice.pdf)" jhiTranslate="entity.action.open">open</a>
+                        {{invoice.pdfContentType}}, {{byteSize(invoice.pdf)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="monoApp.invoice.companyId">Company Id</span></dt>
+                <dd>
+                    <span>{{invoice.companyId}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/invoice', invoice.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

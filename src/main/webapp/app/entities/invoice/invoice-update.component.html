@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-invoice-heading" jhiTranslate="monoApp.invoice.home.createOrEditLabel">Create or edit a Invoice</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!invoice.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="monoApp.invoice.attachmentUrl" for="field_attachmentUrl">Attachment Url</label>
+                    <input type="text" class="form-control" name="attachmentUrl" id="field_attachmentUrl"
+                           formControlName="attachmentUrl"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="monoApp.invoice.pdf" for="field_pdf">Pdf</label>
+                    <div>
+                        <div *ngIf="editForm.get('pdf').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('pdfContentType').value, editForm.get('pdf').value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{editForm.get('pdfContentType').value}}, {{byteSize(editForm.get('pdf').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({pdf: null});editForm.patchValue({pdfContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_pdf" (change)="setFileData($event, 'pdf', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="pdf" id="field_pdf"
+                           formControlName="pdf"/>
+                    <input type="hidden" class="form-control" name="pdfContentType" id="field_pdfContentType"
+                           formControlName="pdfContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="monoApp.invoice.companyId" for="field_companyId">Company Id</label>
+                    <input type="text" class="form-control" name="companyId" id="field_companyId"
+                           formControlName="companyId"/>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

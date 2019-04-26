@@ -1,0 +1,28 @@
+{
+    "name": "Invoice",
+    "fields": [
+        {
+            "fieldName": "attachmentUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pdf",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "companyId",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190426181841",
+    "entityTableName": "invoice",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
