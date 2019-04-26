@@ -1,0 +1,5 @@
+entity Invoice {
+   attachmentUrl String
+   pdf FileBlob
+   companyId String
+}
