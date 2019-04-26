@@ -1,5 +1,8 @@
 entity Invoice {
    attachmentUrl String
-   pdf FileBlob
+   pdf Blob
    companyId String
 }
+service * with serviceClass
+dto * with mapstruct
+filter *
