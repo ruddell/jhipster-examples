@@ -16,12 +16,11 @@ const defaultMiddlewares = [
   loadingBarMiddleware(),
   loggerMiddleware
 ];
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const composedMiddlewares = middlewares =>
   process.env.NODE_ENV === 'development'
-    ? compose(
-        applyMiddleware(...defaultMiddlewares, ...middlewares),
-        DevTools.instrument()
-      )
+    ? composeEnhancers(applyMiddleware(...defaultMiddlewares, ...middlewares))
     : compose(applyMiddleware(...defaultMiddlewares, ...middlewares));
 
 const initialize = (initialState?: IRootState, middlewares = []) => createStore(reducer, initialState, composedMiddlewares(middlewares));
