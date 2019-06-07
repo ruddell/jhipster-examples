@@ -20,17 +20,20 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         contentBase: './target/classes/static/',
         proxy: [{
             context: [
-                /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
                 '/api',
+                '/services',
                 '/management',
                 '/swagger-resources',
                 '/v2/api-docs',
                 '/h2-console',
+                '/oauth2',
+                '/login',
                 '/auth'
             ],
             target: `http${options.tls ? 's' : ''}://localhost:8080`,
             secure: false,
             changeOrigin: options.tls,
+            historyApiFallback: true,
             headers: { host: 'localhost:9000' }
         }],
         stats: options.stats,
