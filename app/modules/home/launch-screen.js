@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView, Text, Image, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 
+import InCallManager from 'react-native-incall-manager'
 import { Images } from '../../shared/themes'
 import styles from './launch-screen.styles'
 
@@ -12,6 +13,11 @@ export default class LaunchScreen extends React.Component {
   }
 
   componentDidAppear () {
+    InCallManager.start({ media: 'audio' });
+    setTimeout(async () => {
+      const permissions = await InCallManager.checkRecordPermission()
+      console.tron.log(permissions)
+    }, 3000)
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
         left: {
