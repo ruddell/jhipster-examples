@@ -1,0 +1,140 @@
+{
+  "name": "NewApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "standard --verbose | snazzy",
+    "clean": "rimraf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
+    "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
+    "newclear": "rimraf $TMPDIR/react-* && watchman watch-del-all && rimraf ios/build && rimraf node_modules/ && npm cache clean --force && npm i",
+    "test:watch": "jest --watch",
+    "updateSnapshot": "jest --updateSnapshot",
+    "coverage": "jest --coverage && open coverage/lcov-report/index.html || xdg-open coverage/lcov-report/index.html",
+    "android:build": "cd android && ./gradlew assembleRelease",
+    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
+    "android:hockeyapp": "cd android && ./gradlew assembleRelease && puck -submit=auto app/build/outputs/apk/app-release.apk",
+    "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
+    "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
+    "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
+    "precommit": "npm run git-hook",
+    "prepush": "npm run git-hook",
+    "git-hook": "npm test -s",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "fixcode": "standard --fix",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "react": "16.8.6",
+    "react-native": "0.60.5",
+    "apisauce": "1.0.4",
+    "format-json": "1.0.3",
+    "identity-obj-proxy": "3.0.0",
+    "lodash": "4.17.15",
+    "prop-types": "15.7.2",
+    "querystringify": "2.1.1",
+    "ramda": "0.26.1",
+    "react-native-vector-icons": "6.6.0",
+    "react-native-keyboard-aware-scroll-view": "0.8.0",
+    "react-redux": "7.1.0",
+    "redux": "4.0.4",
+    "redux-persist": "5.10.0",
+    "redux-saga": "1.0.5",
+    "reduxsauce": "1.1.0",
+    "react-native-navigation": "3.1.0",
+    "seamless-immutable": "7.1.4",
+    "stompjs": "2.3.3",
+    "sockjs-client": "1.3.0",
+    "net": "1.0.2",
+    "tcomb-form-native": "0.6.20"
+  },
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@babel/runtime": "7.5.5",
+    "@react-native-community/eslint-config": "0.0.3",
+    "babel-jest": "24.9.0",
+    "eslint": "6.2.2",
+    "jest": "24.9.0",
+    "metro-react-native-babel-preset": "0.54.1",
+    "react-test-renderer": "16.8.6",
+    "@storybook/addons": "5.1.11",
+    "@storybook/react-native": "5.1.11",
+    "@storybook/theming": "5.1.11",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-preset-env": "1.7.0",
+    "buffer": "5.4.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
+    "ignite-jhipster": "3.1.5",
+    "mockery": "2.1.0",
+    "react-dom": "16.8.6",
+    "reactotron-react-native": "3.6.5",
+    "reactotron-redux": "3.1.1",
+    "reactotron-redux-saga": "4.2.2",
+    "babel-eslint": "10.0.2",
+    "snazzy": "8.0.0",
+    "standard": "12.0.1",
+    "patch-package": "6.1.2",
+    "rimraf": "3.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/Tests/**/*.js",
+      "**/?(*.)(spec|test).js?(x)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/e2e/",
+      "test/setup.js"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "./test/setup"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|tcomb-form-native)"
+    ],
+    "coveragePathIgnorePatterns": [
+      "app/shared/services/api.js",
+      "app/shared/themes/",
+      "/storybook/",
+      "/*\\.story\\.js"
+    ],
+    "preset": "react-native"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "describe",
+      "test",
+      "jest",
+      "expect",
+      "fetch",
+      "navigator",
+      "__DEV__",
+      "XMLHttpRequest",
+      "FormData",
+      "React$Element",
+      "element",
+      "by",
+      "beforeEach",
+      "device",
+      "it",
+      "before",
+      "after",
+      "afterEach",
+      "waitFor"
+    ],
+    "ignore": [
+      "ignite/**",
+      "metro.config.js"
+    ]
+  },
+  "config": {}
+}

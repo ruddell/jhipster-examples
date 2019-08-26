@@ -1,0 +1,40 @@
+{
+	"generator-jhipster": {
+		"promptValues": {
+			"packageName": "tv.sportsbooth.mono"
+		},
+		"jhipsterVersion": "6.2.0",
+		"baseName": "sportsbooth",
+		"packageName": "tv.sportsbooth.mono",
+		"packageFolder": "tv/sportsbooth/mono",
+		"serverPort": "8080",
+		"authenticationType": "jwt",
+		"cacheProvider": "hazelcast",
+		"enableHibernateCache": true,
+		"websocket": "spring-websocket",
+		"databaseType": "sql",
+		"devDatabaseType": "mysql",
+		"prodDatabaseType": "mysql",
+		"searchEngine": false,
+		"messageBroker": false,
+		"serviceDiscoveryType": "eureka",
+		"buildTool": "maven",
+		"enableSocialSignIn": false,
+		"enableSwaggerCodegen": false,
+		"jwtSecretKey": "467bbabf2eac9efaa15366762e5ef553b5a78c23",
+		"clientFramework": "angular1",
+		"useSass": true,
+		"clientPackageManager": "yarn",
+		"applicationType": "monolith",
+		"testFrameworks": [
+			"protractor"
+		],
+		"jhiPrefix": "jhi",
+		"enableTranslation": false,
+		"clientTheme": "none",
+		"entitySuffix": "",
+		"dtoSuffix": "DTO",
+		"otherModules": [],
+		"blueprints": []
+	}
+}
