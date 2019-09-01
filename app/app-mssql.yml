@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-mssql
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-mssql
+  template:
+    metadata:
+      labels:
+        app: app-mssql
+    spec:
+      volumes:
+        - name: mssqldb
+          persistentVolumeClaim:
+            claimName: mssql-data
+        - name: data
+          emptyDir: {}
+      containers:
+        - name: mysql
+          image: microsoft/mssql-server-linux:latest
+          env:
+            - name: MSSQL_PID
+              value: 'Developer'
+            - name: ACCEPT_EULA
+              value: 'Y'
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql
+                  key: SA_PASSWORD
+          ports:
+            - containerPort: 1433
+          volumeMounts:
+            - name: mssqldb
+              mountPath: /var/opt/mssql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-mssql
+  namespace: default
+spec:
+  selector:
+    app: app-mssql
+  ports:
+    - protocol: TCP
+      port: 1433
+      targetPort: 1433
+  type: LoadBalancer
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: app-mssql
+provisioner: kubernetes.io/azure-disk
+parameters:
+  storageaccounttype: Standard_LRS
+  kind: Managed
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mssql-data
+  annotations:
+    volume.beta.kubernetes.io/storage-class: azure-disk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi

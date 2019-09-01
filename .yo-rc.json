@@ -1,0 +1,17 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "app"
+    ],
+    "directoryPath": "../",
+    "serviceDiscoveryType": false,
+    "jwtSecretKey": "OTRhOWE2ZTFkNzQyYmE3MjM0NzExNGVjN2MwNzAwODU2MDQ5NjEzMzcwNDM4OWFiMDIxN2M2MmZiZTE4Y2ZmYmIwMjAzNzMxZmY2NDYwOWY2OTgzZDBiZTkxZDFhMzFmYmRiNA==",
+    "dockerRepositoryName": "",
+    "dockerPushCommand": "docker push",
+    "kubernetesNamespace": "default",
+    "kubernetesServiceType": "LoadBalancer",
+    "ingressDomain": "",
+    "monitoring": "no",
+    "istio": false
+  }
+}
