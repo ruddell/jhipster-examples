@@ -23,6 +23,13 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import InCallManager from 'react-native-incall-manager'
+
+InCallManager.start({ media: 'audio' });
+setTimeout(async () => {
+  const permissions = await InCallManager.checkRecordPermission()
+  console.log(permissions)
+}, 3000)
 
 const App = () => {
   return (
