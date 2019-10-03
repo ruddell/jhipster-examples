@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span data-translate="jhipsterApp.certificateRequestBatch.detail.title">Certificate Request Batch</span> {{vm.certificateRequestBatch.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="jhipsterApp.certificateRequestBatch.name">Name</span></dt>
+        <dd>
+            <span>{{vm.certificateRequestBatch.name}}</span>
+        </dd>
+        <dt><span data-translate="jhipsterApp.certificateRequestBatch.creationDate">Creation Date</span></dt>
+        <dd>
+            <span>{{vm.certificateRequestBatch.creationDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="certificate-request-batch-detail.edit({id:vm.certificateRequestBatch.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

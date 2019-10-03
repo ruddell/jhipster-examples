@@ -1,0 +1,23 @@
+
+{
+    "jhipsterApp": {
+        "certificateRequestBatch" : {
+            "home": {
+                "title": "Certificate Request Batches",
+                "createLabel": "Create a new Certificate Request Batch",
+                "createOrEditLabel": "Create or edit a Certificate Request Batch"
+            },
+            "created": "A new Certificate Request Batch is created with identifier {{ param }}",
+            "updated": "A Certificate Request Batch is updated with identifier {{ param }}",
+            "deleted": "A Certificate Request Batch is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Certificate Request Batch {{ id }}?"
+            },
+            "detail": {
+                "title": "Certificate Request Batch"
+            },
+            "name": "Name",
+            "creationDate": "Creation Date"
+        }
+    }
+}
