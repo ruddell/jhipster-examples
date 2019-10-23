@@ -56,6 +56,8 @@ management:
         auto-time-requests: true
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration
   application:
     name: mono
   profiles:
@@ -143,6 +145,17 @@ jhipster:
     contact-email:
     license:
     license-url:
+kafka:
+  consumer:
+    key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    bootstrap.servers: localhost:9092
+    group.id: mono
+    auto.offset.reset: earliest
+  producer:
+    key.serializer: org.apache.kafka.common.serialization.StringSerializer
+    value.serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap.servers: localhost:9092
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

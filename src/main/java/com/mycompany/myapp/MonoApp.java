@@ -3,6 +3,9 @@ package com.mycompany.myapp;
 import com.mycompany.myapp.config.ApplicationProperties;
 import com.mycompany.myapp.config.DefaultProfileUtil;
 
+import com.mycompany.myapp.service.MonoKafkaConsumer;
+import com.mycompany.myapp.service.MonoKafkaProducer;
+import org.springframework.context.ConfigurableApplicationContext;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -60,7 +63,10 @@ public class MonoApp implements InitializingBean {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(MonoApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
-        Environment env = app.run(args).getEnvironment();
+        ConfigurableApplicationContext applicationContext = app.run(args);
+        applicationContext.getBean(MonoKafkaProducer.class).init();
+        applicationContext.getBean(MonoKafkaConsumer.class).start();
+        Environment env = applicationContext.getEnvironment();
         logApplicationStartup(env);
     }
 
