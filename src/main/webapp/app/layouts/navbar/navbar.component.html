@@ -81,12 +81,6 @@
                         </a>
                     </li>
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    <li *ngIf="!inProduction">
-                        <a class="dropdown-item" href='./h2-console' target="_tab" (click)="collapseNavbar()">
-                            <fa-icon icon="hdd" fixedWidth="true"></fa-icon>
-                            <span jhiTranslate="global.menu.admin.database">Database</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
