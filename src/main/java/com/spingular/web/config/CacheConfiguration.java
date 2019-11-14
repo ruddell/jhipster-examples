@@ -44,6 +44,7 @@ public class CacheConfiguration {
             createCache(cm, com.spingular.web.domain.User.class.getName() + ".authorities");
             createCache(cm, com.spingular.web.domain.PersistentToken.class.getName());
             createCache(cm, com.spingular.web.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.spingular.web.domain.Foo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

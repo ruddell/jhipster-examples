@@ -1,0 +1,22 @@
+{
+  "spingularApp": {
+    "foo": {
+      "home": {
+        "title": "Foos",
+        "createLabel": "Crear nuevo Foo",
+        "createOrEditLabel": "Crear o editar Foo",
+        "notFound": "Ningún Foos encontrado"
+      },
+      "created": "Un nuevo Foo ha sido creado con el identificador {{ param }}",
+      "updated": "Un Foo ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Foo ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Foo {{ id }}?"
+      },
+      "detail": {
+        "title": "Foo"
+      },
+      "name": "Name"
+    }
+  }
+}
