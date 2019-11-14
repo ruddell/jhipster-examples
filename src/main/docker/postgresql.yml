@@ -1,0 +1,11 @@
+version: '2'
+services:
+  spingular-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/spingular/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=spingular
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
