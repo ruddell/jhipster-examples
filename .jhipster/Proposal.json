@@ -1,0 +1,87 @@
+{
+    "name": "Proposal",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proposalName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 250
+        },
+        {
+            "fieldName": "proposalType",
+            "fieldType": "ProposalType",
+            "fieldValues": "STUDY,APPROVED,DEVELOPMENT,PRODUCTION",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proposalRole",
+            "fieldType": "ProposalRole",
+            "fieldValues": "USER,ORGANIZER,MANAGER,ADMIN",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "releaseDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isOpen",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isAccepted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isPaid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "proposalVote",
+            "otherEntityRelationshipName": "proposal",
+            "relationshipName": "proposalVote"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "appuser",
+            "otherEntityRelationshipName": "proposal",
+            "relationshipName": "appuser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "proposal",
+            "relationshipName": "post",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191010214721",
+    "entityTableName": "proposal",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

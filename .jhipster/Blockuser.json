@@ -1,0 +1,49 @@
+{
+    "name": "Blockuser",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "appuser",
+            "otherEntityRelationshipName": "blockeduser",
+            "relationshipName": "blockeduser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "appuser",
+            "otherEntityRelationshipName": "blockinguser",
+            "relationshipName": "blockinguser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "community",
+            "otherEntityRelationshipName": "cblockeduser",
+            "relationshipName": "cblockeduser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "community",
+            "otherEntityRelationshipName": "cblockinguser",
+            "relationshipName": "cblockinguser",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191010214702",
+    "entityTableName": "blockuser",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

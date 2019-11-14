@@ -1,0 +1,61 @@
+{
+    "name": "Vanswer",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "urlVanswer",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 500
+        },
+        {
+            "fieldName": "accepted",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vthumb",
+            "otherEntityRelationshipName": "vanswer",
+            "relationshipName": "vthumb"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "appuser",
+            "otherEntityRelationshipName": "vanswer",
+            "relationshipValidateRules": "required",
+            "relationshipName": "appuser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "vquestion",
+            "otherEntityRelationshipName": "vanswer",
+            "relationshipValidateRules": "required",
+            "relationshipName": "vquestion",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191010214716",
+    "entityTableName": "vanswer",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

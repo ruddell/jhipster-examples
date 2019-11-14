@@ -1,0 +1,183 @@
+{
+    "name": "Appuser",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "assignedVotesPoints",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipValidateRules": "required",
+            "relationshipName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "appprofile",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "appprofile",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "appphoto",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "appphoto",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "community",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "community"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blog",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "blog"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "notification",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "notification"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "album",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "album"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "comment",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "comment"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "post"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "sender",
+            "relationshipName": "sender"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "receiver",
+            "relationshipName": "receiver"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "follow",
+            "otherEntityRelationshipName": "followed",
+            "relationshipName": "followed"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "follow",
+            "otherEntityRelationshipName": "following",
+            "relationshipName": "following"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blockuser",
+            "otherEntityRelationshipName": "blockeduser",
+            "relationshipName": "blockeduser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blockuser",
+            "otherEntityRelationshipName": "blockinguser",
+            "relationshipName": "blockinguser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vtopic",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "vtopic"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vquestion",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "vquestion"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vanswer",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "vanswer"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "vthumb",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "vthumb"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "proposal",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "proposal"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "proposalVote",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "proposalVote"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "interest",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "interest",
+            "otherEntityField": "interestName",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "activity",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "activity",
+            "otherEntityField": "activityName",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "celeb",
+            "otherEntityRelationshipName": "appuser",
+            "relationshipName": "celeb",
+            "otherEntityField": "celebName",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191010214723",
+    "entityTableName": "appuser",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

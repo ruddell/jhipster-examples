@@ -1,0 +1,136 @@
+{
+    "name": "Community",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "communityName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "communityDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 7500
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "isActive",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blog",
+            "otherEntityRelationshipName": "community",
+            "relationshipName": "blog"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cmessage",
+            "otherEntityRelationshipName": "csender",
+            "relationshipName": "csender"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cmessage",
+            "otherEntityRelationshipName": "creceiver",
+            "relationshipName": "creceiver"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "follow",
+            "otherEntityRelationshipName": "cfollowed",
+            "relationshipName": "cfollowed"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "follow",
+            "otherEntityRelationshipName": "cfollowing",
+            "relationshipName": "cfollowing"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blockuser",
+            "otherEntityRelationshipName": "cblockeduser",
+            "relationshipName": "cblockeduser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "blockuser",
+            "otherEntityRelationshipName": "cblockinguser",
+            "relationshipName": "cblockinguser"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "appuser",
+            "otherEntityRelationshipName": "community",
+            "relationshipValidateRules": "required",
+            "relationshipName": "appuser",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "calbum",
+            "otherEntityRelationshipName": "community",
+            "relationshipValidateRules": "required",
+            "relationshipName": "calbum"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "cinterest",
+            "otherEntityRelationshipName": "community",
+            "relationshipName": "cinterest",
+            "otherEntityField": "interestName",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "cactivity",
+            "otherEntityRelationshipName": "community",
+            "relationshipName": "cactivity",
+            "otherEntityField": "activityName",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "cceleb",
+            "otherEntityRelationshipName": "community",
+            "relationshipName": "cceleb",
+            "otherEntityField": "celebName",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191010214700",
+    "entityTableName": "community",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
