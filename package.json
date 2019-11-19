@@ -37,8 +37,14 @@
     "@angular-devkit/build-angular": "^0.803.19",
     "@angular/cli": "8.3.1",
     "@angular/compiler-cli": "8.2.4",
+    "@babel/core": "^7.7.2",
     "@ngtools/webpack": "8.3.1",
     "@openapitools/openapi-generator-cli": "0.0.14-4.0.2",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addon-notes": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/angular": "^5.2.6",
     "@types/jasmine": "^3.4.6",
     "@types/jest": "24.0.18",
     "@types/node": "10.12.27",
@@ -47,6 +53,7 @@
     "@typescript-eslint/parser": "2.7.0",
     "angular2-template-loader": "0.6.2",
     "autoprefixer": "9.6.1",
+    "babel-loader": "^8.0.6",
     "base-href-webpack-plugin": "2.0.0",
     "browser-sync": "2.26.7",
     "browser-sync-webpack-plugin": "2.2.2",
@@ -121,7 +128,9 @@
     "webpack:prod": "npm run cleanup && npm run webpack:prod:main && npm run clean-www",
     "webpack:test": "npm run test",
     "webpack-dev-server": "node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
+    "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jestSonar": {
     "reportPath": "target/test-results/jest",
