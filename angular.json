@@ -26,7 +26,21 @@
         }
       },
       "prefix": "jhi",
-      "architect": {}
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "build",
+            "index": "src/main/webapp/index.html",
+            "main": "src/main/webapp/app/app.main.ts",
+            "polyfills": "src/main/webapp/app/polyfills.ts",
+            "tsConfig": "tsconfig.json",
+            "assets": ["src/main/webapp/content"],
+            "styles": ["src/main/webapp/content/scss/global.scss"],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "defaultProject": "mono",
