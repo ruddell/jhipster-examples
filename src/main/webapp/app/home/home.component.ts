@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account;
   authSubscription: Subscription;
   modalRef: NgbModalRef;
+  text: string;
 
   constructor(
     private accountService: AccountService,

@@ -8,5 +8,11 @@ eg $input-color: red;
 @import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/nova-light/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */
