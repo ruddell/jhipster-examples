@@ -30,6 +30,12 @@ public class ClientForwardControllerTest {
     }
 
     @Test
+    public void getDefaultEndpoint() throws Exception {
+        restMockMvc.perform(get("/"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void getBackendEndpoint() throws Exception {
         restMockMvc.perform(get("/test"))
             .andExpect(status().isOk())
@@ -50,6 +56,37 @@ public class ClientForwardControllerTest {
         restMockMvc.perform(get("/admin/user-management"))
             .andExpect(status().isOk())
             .andExpect(forwardedUrl("/"));
+    }
+
+    @Test
+    public void getTripleNestedClientEndpoint() throws Exception {
+        restMockMvc.perform(get("/admin/user-management/view"))
+            .andExpect(status().isOk())
+            .andExpect(forwardedUrl("/"));
+    }
+
+    @Test
+    public void getWebsocketEndpointInfo() throws Exception {
+        restMockMvc.perform(get("/websocket/info"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getWebsocketEndpointXhrStreaming() throws Exception {
+        restMockMvc.perform(get("/websocket/tracker/308/po23kmv/xhr_streaming"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getWebsocketEndpointXhr() throws Exception {
+        restMockMvc.perform(get("/websocket/tracker/xhr"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getWebsocketEndpointEventSource() throws Exception {
+        restMockMvc.perform(get("/websocket/tracker/eventsource"))
+            .andExpect(status().isNotFound());
     }
 
     @RestController
