@@ -59,6 +59,7 @@ public class EmployeeService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    // this method is modified to retrieve the entire tree of employees
     /**
      * Get one employee by id.
      *
@@ -69,6 +70,11 @@ public class EmployeeService {
     public Optional<EmployeeDTO> findOne(Long id) {
         log.debug("Request to get Employee : {}", id);
         return employeeRepository.findById(id)
+            .map(employee -> {
+                // eagerly loads the employee list, otherwise they are not fetched by default
+                employee.getEmployees();
+                return employee;
+            })
             .map(employeeMapper::toDto);
     }
 

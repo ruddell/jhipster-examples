@@ -13,7 +13,11 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ employee }) => (this.employee = employee));
+    this.activatedRoute.data.subscribe(({ employee }) => {
+      this.employee = employee;
+      /* eslint-disable */
+      console.log(employee);
+    });
   }
 
   previousState(): void {

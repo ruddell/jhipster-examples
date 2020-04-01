@@ -88,6 +88,7 @@ public class EmployeeResource {
         return employeeService.findAll();
     }
 
+    // this method is modified to retrieve the entire tree of employees
     /**
      * {@code GET  /employees/:id} : get the "id" employee.
      *

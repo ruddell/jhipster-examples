@@ -18,6 +18,12 @@
                         <a [routerLink]="['/employee', employee.managerId, 'view']">{{ employee.managerName }}</a>
                     </div>
                 </dd>
+
+                <dt><span>Employees</span></dt>
+                <!-- see bottom of html for recursiveListTmpl template -->
+                <dd *ngIf="employee!.employees!.length > 0">
+                    <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ $implicit: employee.employees }"></ng-container>
+                </dd>
             </dl>
 
             <button type="submit"
@@ -34,3 +40,13 @@
         </div>
     </div>
 </div>
+
+<!--small demo from https://trungk18.com/experience/angular-recursive-view-render/-->
+<ng-template #recursiveListTmpl let-list>
+    <li *ngFor="let item of list">
+        <a [routerLink]="['/employee', item.id, 'view']">{{ item.name }}</a>
+        <ul *ngIf="item.employees.length > 0">
+            <ng-container *ngTemplateOutlet="recursiveListTmpl; context:{ $implicit: item.employees }"></ng-container>
+        </ul>
+    </li>
+</ng-template>

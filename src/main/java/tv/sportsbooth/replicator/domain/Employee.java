@@ -29,7 +29,8 @@ public class Employee implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "manager")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // disabled so it's always updated, probably can choose a different CacheConcurrencyStrategy
+//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Employee> employees = new HashSet<>();
 
     @ManyToOne

@@ -2,21 +2,23 @@ package tv.sportsbooth.replicator.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link tv.sportsbooth.replicator.domain.Employee} entity.
  */
 public class EmployeeDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
 
-
     private Long managerId;
 
     private String managerName;
-    
+
+    private Set<EmployeeDTO> employees;
+
     public Long getId() {
         return id;
     }
@@ -49,6 +51,14 @@ public class EmployeeDTO implements Serializable {
         this.managerName = employeeName;
     }
 
+    public Set<EmployeeDTO> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<EmployeeDTO> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -77,6 +87,7 @@ public class EmployeeDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", managerId=" + getManagerId() +
             ", managerName='" + getManagerName() + "'" +
+            ", employees='" + getManagerName() + "'" +
             "}";
     }
 }
