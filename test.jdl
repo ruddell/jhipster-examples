@@ -1,0 +1,8 @@
+entity Employee {
+    name String
+}
+
+relationship OneToMany {
+   Employee{employee(name)} to Employee{manager(name)}
+}
+
