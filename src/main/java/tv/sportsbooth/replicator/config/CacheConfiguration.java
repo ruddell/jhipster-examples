@@ -42,6 +42,8 @@ public class CacheConfiguration {
             createCache(cm, tv.sportsbooth.replicator.domain.User.class.getName());
             createCache(cm, tv.sportsbooth.replicator.domain.Authority.class.getName());
             createCache(cm, tv.sportsbooth.replicator.domain.User.class.getName() + ".authorities");
+            createCache(cm, tv.sportsbooth.replicator.domain.Employee.class.getName());
+            createCache(cm, tv.sportsbooth.replicator.domain.Employee.class.getName() + ".employees");
             // jhipster-needle-ehcache-add-entry
         };
     }
