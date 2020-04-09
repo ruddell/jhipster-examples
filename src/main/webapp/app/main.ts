@@ -50,13 +50,13 @@ const translationService = new TranslationService(store, i18n);
 const loginService = new LoginService();
 const accountService = new AccountService(store, translationService, router);
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (!to.matched.length) {
     next('/not-found');
   }
 
   if (to.meta && to.meta.authorities && to.meta.authorities.length > 0) {
-    if (!accountService.hasAnyAuthority(to.meta.authorities)) {
+    if (!(await accountService.hasAnyAuthorityAndCheckAuth(to.meta.authorities))) {
       sessionStorage.setItem('requested-url', to.fullPath);
       next('/forbidden');
     } else {

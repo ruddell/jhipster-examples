@@ -9,10 +9,6 @@ export default class AccountService {
   }
 
   public init(): void {
-    const token = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
-    if (!this.store.getters.account && !this.store.getters.logon && token) {
-      this.retrieveAccount();
-    }
     this.retrieveProfiles();
   }
 
@@ -25,9 +21,9 @@ export default class AccountService {
     });
   }
 
-  public retrieveAccount(): void {
+  public async retrieveAccount(): Promise<void> {
     this.store.commit('authenticate');
-    axios
+    await axios
       .get('api/account')
       .then(response => {
         const account = response.data;
@@ -59,6 +55,30 @@ export default class AccountService {
     }
     if (!this.authenticated || !this.userAuthorities) {
       return false;
+    }
+
+    for (let i = 0; i < authorities.length; i++) {
+      if (this.userAuthorities.includes(authorities[i])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public async hasAnyAuthorityAndCheckAuth(authorities: any): Promise<boolean> {
+    if (typeof authorities === 'string') {
+      authorities = [authorities];
+    }
+
+    if (!this.authenticated || !this.userAuthorities) {
+      const token = localStorage.getItem('jhi-authenticationToken') || sessionStorage.getItem('jhi-authenticationToken');
+      if (!this.store.getters.account && !this.store.getters.logon && token) {
+        await this.retrieveAccount();
+        return this.authenticated;
+      } else {
+        return false;
+      }
     }
 
     for (let i = 0; i < authorities.length; i++) {
