@@ -1,0 +1,8 @@
+entity Foo {
+ test Country
+}
+enum Country {
+  BELGIUM (Belgium),
+  FRANCE (France),
+  ITALY (Italy)
+}
