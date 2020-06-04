@@ -1,0 +1,23 @@
+{
+  "name": "uaa",
+  "version": "0.0.0",
+  "description": "Description for uaa",
+  "private": true,
+  "license": "UNLICENSED",
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "generator-jhipster": "6.9.0",
+    "husky": "4.2.5",
+    "lint-staged": "8.2.1",
+    "prettier": "2.0.5",
+    "@openapitools/openapi-generator-cli": "1.0.12-4.3.0"
+  },
+  "engines": {
+    "node": ">=12.16.1"
+  },
+  "scripts": {
+    "prettier:format": "prettier --write \"{,src/**/}*.{md,json,yml}\""
+  }
+}
