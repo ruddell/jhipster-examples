@@ -4,7 +4,7 @@
     {
       "fieldName": "test",
       "fieldType": "Country",
-      "fieldValues": "BELGIUM (Belgium),FRANCE (France),ITALY (Italy)"
+      "fieldValues": "BELGIUM (Belgium),USA (UnitedStates),FRANCE (France),ITALY (Italy)"
     }
   ],
   "relationships": [],

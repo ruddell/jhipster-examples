@@ -5,6 +5,7 @@ package com.mycompany.myapp.domain.enumeration;
  */
 public enum Country {
     BELGIUM("Belgium"),
+    USA("UnitedStates"),
     FRANCE("France"),
     ITALY("Italy");
 

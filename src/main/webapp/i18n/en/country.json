@@ -3,6 +3,7 @@
     "Country": {
       "null": "",
       "BELGIUM": "Belgium",
+      "USA": "UnitedStates",
       "FRANCE": "France",
       "ITALY": "Italy"
     }
