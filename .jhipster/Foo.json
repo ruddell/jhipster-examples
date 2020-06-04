@@ -1,0 +1,22 @@
+{
+  "name": "Foo",
+  "fields": [
+    {
+      "fieldName": "test",
+      "fieldType": "Country",
+      "fieldValues": "BELGIUM (Belgium),FRANCE (France),ITALY (Italy)"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20200604183738",
+  "entityTableName": "foo",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

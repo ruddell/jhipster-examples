@@ -1,0 +1,10 @@
+{
+  "monoApp": {
+    "Country": {
+      "null": "",
+      "BELGIUM": "Belgium",
+      "FRANCE": "France",
+      "ITALY": "Italy"
+    }
+  }
+}
