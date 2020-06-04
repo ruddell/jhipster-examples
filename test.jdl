@@ -3,6 +3,7 @@ entity Foo {
 }
 enum Country {
   BELGIUM (Belgium),
+  USA (UnitedStates),
   FRANCE (France),
   ITALY (Italy)
 }
