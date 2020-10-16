@@ -37,6 +37,9 @@ class FooResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_TITLE = "AAAAAAAAAA";
+    private static final String UPDATED_TITLE = "BBBBBBBBBB";
+
     @Autowired
     private FooRepository fooRepository;
 
@@ -64,7 +67,7 @@ class FooResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Foo createEntity(EntityManager em) {
-        Foo foo = new Foo().name(DEFAULT_NAME);
+        Foo foo = new Foo().name(DEFAULT_NAME).title(DEFAULT_TITLE);
         return foo;
     }
 
@@ -75,7 +78,7 @@ class FooResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Foo createUpdatedEntity(EntityManager em) {
-        Foo foo = new Foo().name(UPDATED_NAME);
+        Foo foo = new Foo().name(UPDATED_NAME).title(UPDATED_TITLE);
         return foo;
     }
 
@@ -99,6 +102,7 @@ class FooResourceIT {
         assertThat(fooList).hasSize(databaseSizeBeforeCreate + 1);
         Foo testFoo = fooList.get(fooList.size() - 1);
         assertThat(testFoo.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testFoo.getTitle()).isEqualTo(DEFAULT_TITLE);
     }
 
     @Test
@@ -132,7 +136,8 @@ class FooResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(foo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)));
     }
 
     @Test
@@ -147,7 +152,8 @@ class FooResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(foo.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE));
     }
 
     @Test
@@ -246,6 +252,84 @@ class FooResourceIT {
         defaultFooShouldBeFound("name.doesNotContain=" + UPDATED_NAME);
     }
 
+    @Test
+    @Transactional
+    void getAllFoosByTitleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title equals to DEFAULT_TITLE
+        defaultFooShouldBeFound("title.equals=" + DEFAULT_TITLE);
+
+        // Get all the fooList where title equals to UPDATED_TITLE
+        defaultFooShouldNotBeFound("title.equals=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllFoosByTitleIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title not equals to DEFAULT_TITLE
+        defaultFooShouldNotBeFound("title.notEquals=" + DEFAULT_TITLE);
+
+        // Get all the fooList where title not equals to UPDATED_TITLE
+        defaultFooShouldBeFound("title.notEquals=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllFoosByTitleIsInShouldWork() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title in DEFAULT_TITLE or UPDATED_TITLE
+        defaultFooShouldBeFound("title.in=" + DEFAULT_TITLE + "," + UPDATED_TITLE);
+
+        // Get all the fooList where title equals to UPDATED_TITLE
+        defaultFooShouldNotBeFound("title.in=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllFoosByTitleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title is not null
+        defaultFooShouldBeFound("title.specified=true");
+
+        // Get all the fooList where title is null
+        defaultFooShouldNotBeFound("title.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllFoosByTitleContainsSomething() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title contains DEFAULT_TITLE
+        defaultFooShouldBeFound("title.contains=" + DEFAULT_TITLE);
+
+        // Get all the fooList where title contains UPDATED_TITLE
+        defaultFooShouldNotBeFound("title.contains=" + UPDATED_TITLE);
+    }
+
+    @Test
+    @Transactional
+    void getAllFoosByTitleNotContainsSomething() throws Exception {
+        // Initialize the database
+        fooRepository.saveAndFlush(foo);
+
+        // Get all the fooList where title does not contain DEFAULT_TITLE
+        defaultFooShouldNotBeFound("title.doesNotContain=" + DEFAULT_TITLE);
+
+        // Get all the fooList where title does not contain UPDATED_TITLE
+        defaultFooShouldBeFound("title.doesNotContain=" + UPDATED_TITLE);
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned.
      */
@@ -255,7 +339,8 @@ class FooResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(foo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)));
 
         // Check, that the count call also returns 1
         restFooMockMvc
@@ -303,7 +388,7 @@ class FooResourceIT {
         Foo updatedFoo = fooRepository.findById(foo.getId()).get();
         // Disconnect from session so that the updates on updatedFoo are not directly saved in db
         em.detach(updatedFoo);
-        updatedFoo.name(UPDATED_NAME);
+        updatedFoo.name(UPDATED_NAME).title(UPDATED_TITLE);
         FooDTO fooDTO = fooMapper.toDto(updatedFoo);
 
         restFooMockMvc
@@ -315,6 +400,7 @@ class FooResourceIT {
         assertThat(fooList).hasSize(databaseSizeBeforeUpdate);
         Foo testFoo = fooList.get(fooList.size() - 1);
         assertThat(testFoo.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testFoo.getTitle()).isEqualTo(UPDATED_TITLE);
     }
 
     @Test
@@ -347,7 +433,7 @@ class FooResourceIT {
         Foo partialUpdatedFoo = new Foo();
         partialUpdatedFoo.setId(foo.getId());
 
-        partialUpdatedFoo.name(UPDATED_NAME);
+        partialUpdatedFoo.name(UPDATED_NAME).title(UPDATED_TITLE);
 
         restFooMockMvc
             .perform(
@@ -360,6 +446,7 @@ class FooResourceIT {
         assertThat(fooList).hasSize(databaseSizeBeforeUpdate);
         Foo testFoo = fooList.get(fooList.size() - 1);
         assertThat(testFoo.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testFoo.getTitle()).isEqualTo(UPDATED_TITLE);
     }
 
     @Test
@@ -374,7 +461,7 @@ class FooResourceIT {
         Foo partialUpdatedFoo = new Foo();
         partialUpdatedFoo.setId(foo.getId());
 
-        partialUpdatedFoo.name(UPDATED_NAME);
+        partialUpdatedFoo.name(UPDATED_NAME).title(UPDATED_TITLE);
 
         restFooMockMvc
             .perform(
@@ -387,6 +474,7 @@ class FooResourceIT {
         assertThat(fooList).hasSize(databaseSizeBeforeUpdate);
         Foo testFoo = fooList.get(fooList.size() - 1);
         assertThat(testFoo.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testFoo.getTitle()).isEqualTo(UPDATED_TITLE);
     }
 
     @Test

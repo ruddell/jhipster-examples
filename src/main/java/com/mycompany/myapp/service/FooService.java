@@ -61,6 +61,10 @@ public class FooService {
                         existingFoo.setName(fooDTO.getName());
                     }
 
+                    if (fooDTO.getTitle() != null) {
+                        existingFoo.setTitle(fooDTO.getTitle());
+                    }
+
                     return existingFoo;
                 }
             )

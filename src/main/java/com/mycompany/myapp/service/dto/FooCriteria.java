@@ -29,11 +29,14 @@ public class FooCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
+    private StringFilter title;
+
     public FooCriteria() {}
 
     public FooCriteria(FooCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
+        this.title = other.title == null ? null : other.title.copy();
     }
 
     @Override
@@ -57,6 +60,14 @@ public class FooCriteria implements Serializable, Criteria {
         this.name = name;
     }
 
+    public StringFilter getTitle() {
+        return title;
+    }
+
+    public void setTitle(StringFilter title) {
+        this.title = title;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -66,12 +77,12 @@ public class FooCriteria implements Serializable, Criteria {
             return false;
         }
         final FooCriteria that = (FooCriteria) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, title);
     }
 
     // prettier-ignore
@@ -80,6 +91,7 @@ public class FooCriteria implements Serializable, Criteria {
         return "FooCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
+                (title != null ? "title=" + title + ", " : "") +
             "}";
     }
 }

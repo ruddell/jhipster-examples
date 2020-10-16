@@ -3,6 +3,10 @@
     {
       "fieldName": "name",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
     }
   ],
   "relationships": [],

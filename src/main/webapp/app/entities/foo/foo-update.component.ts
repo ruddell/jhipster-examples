@@ -19,6 +19,7 @@ export class FooUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [],
+    title: [],
   });
 
   constructor(
@@ -39,6 +40,7 @@ export class FooUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: foo.id,
       name: foo.name,
+      title: foo.title,
     });
   }
 
@@ -65,6 +67,7 @@ export class FooUpdateComponent implements OnInit {
       ...new Foo(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      title: this.editForm.get(['title'])!.value,
     };
   }
 

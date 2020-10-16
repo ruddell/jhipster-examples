@@ -31,6 +31,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="ajskdlfjaskldfasApp.foo.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="title"><span jhiTranslate="ajskdlfjaskldfasApp.foo.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -38,6 +39,7 @@
                 <tr *ngFor="let foo of foos; trackBy: trackId" data-cy="entityTable">
                     <td><a [routerLink]="['/foo', foo.id, 'view']">{{ foo.id }}</a></td>
                     <td>{{ foo.name }}</td>
+                    <td>{{ foo.title }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

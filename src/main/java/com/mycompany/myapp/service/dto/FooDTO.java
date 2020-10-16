@@ -12,6 +12,8 @@ public class FooDTO implements Serializable {
 
     private String name;
 
+    private String title;
+
     public Long getId() {
         return id;
     }
@@ -26,6 +28,14 @@ public class FooDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -51,6 +61,7 @@ public class FooDTO implements Serializable {
         return "FooDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", title='" + getTitle() + "'" +
             "}";
     }
 }

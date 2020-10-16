@@ -90,6 +90,9 @@ public class FooQueryService extends QueryService<Foo> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), Foo_.name));
             }
+            if (criteria.getTitle() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTitle(), Foo_.title));
+            }
         }
         return specification;
     }
