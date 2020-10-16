@@ -45,6 +45,7 @@
     "jwtSecretKey": "ZGMwMjY2MDdjMzgwYzg1OTlhZTZkOTU0ZGM5MzkxOTk4NzgyMjA0OTQyNGRkMDNhY2QzZTE1NjRkNWRjYWE4ZDc1MTVkOWY5M2E5ZDZmYTI4OThmZjE1ODBjOGNlZTVmZmE4MTZhNzMzMDBjOTdjOThkODQ5OGU0MmE4YWNiODE=",
     "clientThemeVariant": "primary",
     "useSass": true,
-    "languages": ["en"]
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1602875664000
   }
 }
