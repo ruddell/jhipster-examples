@@ -66,7 +66,6 @@ const connect = () => {
   stompClient.connect(headers, () => {
     connectedPromise('success');
     connectedPromise = null;
-    subscribe();
     sendActivity();
     if (!alreadyConnectedOnce) {
       window.onhashchange = () => {
@@ -98,7 +97,9 @@ const unsubscribe = () => {
 export default store => next => action => {
   if (action.type === SUCCESS(AUTH_ACTIONS.GET_SESSION)) {
     connect();
-    if (!alreadyConnectedOnce) {
+    const isAdmin = action.payload.data.authorities.indexOf('ROLE_ADMIN') !== -1;
+    if (!alreadyConnectedOnce && isAdmin) {
+      subscribe();
       receive().subscribe(activity => {
         return store.dispatch({
           type: ADMIN_ACTIONS.WEBSOCKET_ACTIVITY_MESSAGE,
