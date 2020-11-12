@@ -52,6 +52,23 @@ public class ClientForwardControllerTest {
             .andExpect(forwardedUrl("/"));
     }
 
+    @Test
+    public void getWebsocketInfoEndpoint() throws Exception {
+        restMockMvc.perform(get("/websocket/info"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getWebsocketEndpoint() throws Exception {
+        restMockMvc.perform(get("/websocket/tracker/308/sessionId/websocket"))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getWebsocketFallbackEndpoint() throws Exception {
+        restMockMvc.perform(get("/websocket/tracker/308/sessionId/xhr_streaming"))
+            .andExpect(status().isNotFound());
+    }
 
     @RestController
     public static class TestController {

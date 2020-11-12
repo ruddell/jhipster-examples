@@ -30,6 +30,8 @@
     "ngx-webstorage": "4.0.1",
     "rxjs": "6.5.3",
     "swagger-ui-dist": "3.24.3",
+    "sockjs-client": "1.4.0",
+    "webstomp-client": "1.2.6",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
   },
@@ -40,6 +42,7 @@
     "@openapitools/openapi-generator-cli": "1.0.10-4.2.3",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.17",
+    "@types/sockjs-client": "1.1.1",
     "@typescript-eslint/eslint-plugin": "2.11.0",
     "@typescript-eslint/eslint-plugin-tslint": "2.11.0",
     "@typescript-eslint/parser": "2.11.0",
